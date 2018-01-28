@@ -14,32 +14,38 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
-            
-            // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
-                
-                // Copy gameplay related content over to the scene
-                sceneNode.entities = scene.entities
-                sceneNode.graphs = scene.graphs
-                
-                // Set the scale mode to scale to fit the window
-                sceneNode.scaleMode = .aspectFill
-                
-                // Present the scene
-                if let view = self.view as! SKView? {
-                    view.presentScene(sceneNode)
-                    
-                    view.ignoresSiblingOrder = true
-                    
-                    view.showsFPS = true
-                    view.showsNodeCount = true
-                }
-            }
+        let gameData = self.createGameData()
+        let scene = MainGameScene(size: self.view.frame.size, data: gameData)
+        if let view = self.view as? SKView {
+            view.presentScene(scene)
+            view.ignoresSiblingOrder = true
+            view.showsFPS = true
+            view.showsNodeCount = true
         }
+    }
+    
+    func createGameData() -> GameData {
+        var gameData = GameData()
+        gameData.balls.append(self.randomBall())
+        gameData.balls.append(self.randomBall())
+        gameData.barriers.append(self.randomBarrier())
+        gameData.barriers.append(self.randomBarrier())
+        return gameData
+    }
+    
+    func randomBall() -> Ball {
+        var ball = Ball()
+        ball.color = .red
+        ball.position = CGPoint(x: CGFloat(arc4random() % UInt32(self.view.frame.width)), y: CGFloat(arc4random() % UInt32(self.view.frame.height)))
+        return ball
+    }
+    
+    func randomBarrier() -> Barrier {
+        var barrier = Barrier()
+        barrier.fillColor = .green
+        barrier.path = UIBezierPath(rect: CGRect(origin: CGPoint(x: CGFloat(arc4random() % UInt32(self.view.frame.width)), y: CGFloat(arc4random() % UInt32(self.view.frame.height))),
+                                                  size: CGSize(width: 100, height: 100))).cgPath
+        return barrier
     }
 
     override var shouldAutorotate: Bool {

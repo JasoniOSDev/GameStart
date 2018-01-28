@@ -15,6 +15,9 @@
 		D57DAA9B2011BBD60020D198 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA992011BBD60020D198 /* Main.storyboard */; };
 		D57DAA9D2011BBD60020D198 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA9C2011BBD60020D198 /* Assets.xcassets */; };
 		D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA9E2011BBD60020D198 /* LaunchScreen.storyboard */; };
+		D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA72011BBEF0020D198 /* MainGameScene.swift */; };
+		D57DAAAA2011BC190020D198 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA92011BC190020D198 /* GameData.swift */; };
+		D57DAAAC2012153B0020D198 /* texture_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D57DAAAB2012153A0020D198 /* texture_3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		D57DAA9C2011BBD60020D198 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D57DAA9F2011BBD60020D198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D57DAAA12011BBD60020D198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D57DAAA72011BBEF0020D198 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
+		D57DAAA92011BC190020D198 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		D57DAAAB2012153A0020D198 /* texture_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,8 @@
 		D57DAA8E2011BBD60020D198 /* BrainDot */ = {
 			isa = PBXGroup;
 			children = (
+				D57DAAAB2012153A0020D198 /* texture_3.png */,
+				D57DAAA72011BBEF0020D198 /* MainGameScene.swift */,
 				D57DAA8F2011BBD60020D198 /* AppDelegate.swift */,
 				D57DAA912011BBD60020D198 /* GameScene.sks */,
 				D57DAA932011BBD60020D198 /* Actions.sks */,
@@ -69,6 +77,7 @@
 				D57DAA9C2011BBD60020D198 /* Assets.xcassets */,
 				D57DAA9E2011BBD60020D198 /* LaunchScreen.storyboard */,
 				D57DAAA12011BBD60020D198 /* Info.plist */,
+				D57DAAA92011BC190020D198 /* GameData.swift */,
 			);
 			path = BrainDot;
 			sourceTree = "<group>";
@@ -137,6 +146,7 @@
 				D57DAA9D2011BBD60020D198 /* Assets.xcassets in Resources */,
 				D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */,
 				D57DAA942011BBD60020D198 /* Actions.sks in Resources */,
+				D57DAAAC2012153B0020D198 /* texture_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +158,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57DAA962011BBD60020D198 /* GameScene.swift in Sources */,
+				D57DAAAA2011BC190020D198 /* GameData.swift in Sources */,
 				D57DAA982011BBD60020D198 /* GameViewController.swift in Sources */,
 				D57DAA902011BBD60020D198 /* AppDelegate.swift in Sources */,
+				D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XY62SV3XGC;
 				INFOPLIST_FILE = BrainDot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -304,6 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XY62SV3XGC;
 				INFOPLIST_FILE = BrainDot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
