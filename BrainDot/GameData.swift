@@ -6,7 +6,7 @@
 //  Copyright © 2018年 陈杰生. All rights reserved.
 //
 
-import UIKit
+import SpriteKit
 
 struct Ball {
     var color: UIColor! = .black
@@ -21,6 +21,22 @@ struct Barrier {
     var stokeColor: UIColor! = .black
     var lineWidth: CGFloat = 2
     
+}
+
+struct DrawPan {
+    var textureName: String!
+    var texture: SKTexture{
+        get {
+            return SKTexture(imageNamed: self.textureName)
+        }
+    }
+    var panName: String!
+    var displayTextureName: String!
+    var displayTexture: SKTexture {
+        get {
+            return SKTexture(imageNamed: self.displayTextureName)
+        }
+    }
 }
 
 struct DrawBarrier {

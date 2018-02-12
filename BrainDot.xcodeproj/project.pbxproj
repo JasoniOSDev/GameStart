@@ -17,7 +17,7 @@
 		D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA9E2011BBD60020D198 /* LaunchScreen.storyboard */; };
 		D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA72011BBEF0020D198 /* MainGameScene.swift */; };
 		D57DAAAA2011BC190020D198 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA92011BC190020D198 /* GameData.swift */; };
-		D57DAAAC2012153B0020D198 /* texture_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D57DAAAB2012153A0020D198 /* texture_3.png */; };
+		D57DAAAC2012153B0020D198 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = D57DAAAB2012153A0020D198 /* texture.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		D57DAAA12011BBD60020D198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D57DAAA72011BBEF0020D198 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
 		D57DAAA92011BC190020D198 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
-		D57DAAAB2012153A0020D198 /* texture_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_3.png; sourceTree = "<group>"; };
+		D57DAAAB2012153A0020D198 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 		D57DAA8E2011BBD60020D198 /* BrainDot */ = {
 			isa = PBXGroup;
 			children = (
-				D57DAAAB2012153A0020D198 /* texture_3.png */,
+				D57DAAAB2012153A0020D198 /* texture.png */,
 				D57DAAA72011BBEF0020D198 /* MainGameScene.swift */,
 				D57DAA8F2011BBD60020D198 /* AppDelegate.swift */,
 				D57DAA912011BBD60020D198 /* GameScene.sks */,
@@ -146,7 +146,7 @@
 				D57DAA9D2011BBD60020D198 /* Assets.xcassets in Resources */,
 				D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */,
 				D57DAA942011BBD60020D198 /* Actions.sks in Resources */,
-				D57DAAAC2012153B0020D198 /* texture_3.png in Resources */,
+				D57DAAAC2012153B0020D198 /* texture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

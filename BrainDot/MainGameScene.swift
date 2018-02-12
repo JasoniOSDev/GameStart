@@ -89,12 +89,17 @@ class MainGameScene: SKScene {
 //        }
         if let _ = self.curDrawBarrierNode.path {
             if let texture = self.view?.texture(from: self.curDrawBarrierNode) {
-                self.curDrawBarrierNode.physicsBody = SKPhysicsBody(texture: texture, size: self.curDrawBarrierNode.frame.size)
-                self.curDrawBarrierNode.physicsBody?.categoryBitMask = drawBarrierCategory
-                self.curDrawBarrierNode.physicsBody?.collisionBitMask = 0xFFFFFFFF
-                self.curDrawBarrierNode.physicsBody?.allowsRotation = true
-                self.curDrawBarrierNode.physicsBody?.usesPreciseCollisionDetection = true
-                self.curDrawBarrierNode.physicsBody?.affectedByGravity = true
+                let drawBarrierNode = SKSpriteNode(texture: texture)
+                drawBarrierNode.size = self.curDrawBarrierNode.frame.size
+                drawBarrierNode.position = CGPoint(x: self.curDrawBarrierNode.frame.midX, y: self.curDrawBarrierNode.frame.midY)
+                self.addChild(drawBarrierNode)
+                self.curDrawBarrierNode.removeFromParent()
+                drawBarrierNode.physicsBody = SKPhysicsBody(texture: texture, size: self.curDrawBarrierNode.frame.size)
+                drawBarrierNode.physicsBody?.categoryBitMask = drawBarrierCategory
+                drawBarrierNode.physicsBody?.collisionBitMask = 0xFFFFFFFF
+                drawBarrierNode.physicsBody?.allowsRotation = true
+                drawBarrierNode.physicsBody?.usesPreciseCollisionDetection = true
+                drawBarrierNode.physicsBody?.affectedByGravity = true
             }
         }
     }
@@ -117,6 +122,12 @@ class MainGameScene: SKScene {
                 }
             }
         }
+        
+        //创建测试node
+//        let textNode = SKSpriteNode(texture: SKTexture(imageNamed: "texture"))
+//        self.addChild(textNode)
+//        textNode.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+//        textNode.physicsBody = SKPhysicsBody(texture: textNode.texture!, size: textNode.texture!.size())
     }
     
     func createBallWith(ball: Ball!) -> SKShapeNode {
@@ -150,8 +161,10 @@ class MainGameScene: SKScene {
     func createDrawBarrierWith(drawBarrier: DrawBarrier!) -> SKShapeNode {
         let shapeNode = SKShapeNode()
         shapeNode.fillColor = .clear
-        shapeNode.strokeColor = .blue
+//        shapeNode.strokeColor = .blue
         shapeNode.lineWidth = 20
+        shapeNode.strokeTexture = SKTexture(imageNamed: "strokeTexture")
+        shapeNode.lineCap = .round
         return shapeNode
     }
 }
