@@ -18,6 +18,10 @@
 		D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA72011BBEF0020D198 /* MainGameScene.swift */; };
 		D57DAAAA2011BC190020D198 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA92011BC190020D198 /* GameData.swift */; };
 		D57DAAAC2012153B0020D198 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = D57DAAAB2012153A0020D198 /* texture.png */; };
+		D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56534203BCE2E007FF406 /* BubbleView.swift */; };
+		D5D5653C203BE986007FF406 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5D5653B203BE986007FF406 /* CoreGraphics.framework */; };
+		D5D56541203D38EF007FF406 /* UIColor+BrainDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */; };
+		D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,11 @@
 		D57DAAA72011BBEF0020D198 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
 		D57DAAA92011BC190020D198 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		D57DAAAB2012153A0020D198 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		D5D56534203BCE2E007FF406 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
+		D5D56536203BE8CD007FF406 /* BrainDot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrainDot-Bridging-Header.h"; sourceTree = "<group>"; };
+		D5D5653B203BE986007FF406 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+BrainDot.swift"; sourceTree = "<group>"; };
+		D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainDotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D5653C203BE986007FF406 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +62,7 @@
 			children = (
 				D57DAA8E2011BBD60020D198 /* BrainDot */,
 				D57DAA8D2011BBD60020D198 /* Products */,
+				D5D5653A203BE985007FF406 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,12 +85,24 @@
 				D57DAA952011BBD60020D198 /* GameScene.swift */,
 				D57DAA972011BBD60020D198 /* GameViewController.swift */,
 				D57DAA992011BBD60020D198 /* Main.storyboard */,
+				D5D56534203BCE2E007FF406 /* BubbleView.swift */,
+				D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */,
+				D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */,
 				D57DAA9C2011BBD60020D198 /* Assets.xcassets */,
 				D57DAA9E2011BBD60020D198 /* LaunchScreen.storyboard */,
 				D57DAAA12011BBD60020D198 /* Info.plist */,
 				D57DAAA92011BC190020D198 /* GameData.swift */,
+				D5D56536203BE8CD007FF406 /* BrainDot-Bridging-Header.h */,
 			);
 			path = BrainDot;
+			sourceTree = "<group>";
+		};
+		D5D5653A203BE985007FF406 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5D5653B203BE986007FF406 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,6 +137,7 @@
 				TargetAttributes = {
 					D57DAA8B2011BBD60020D198 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -157,9 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */,
 				D57DAA962011BBD60020D198 /* GameScene.swift in Sources */,
+				D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */,
 				D57DAAAA2011BC190020D198 /* GameData.swift in Sources */,
 				D57DAA982011BBD60020D198 /* GameViewController.swift in Sources */,
+				D5D56541203D38EF007FF406 /* UIColor+BrainDot.swift in Sources */,
 				D57DAA902011BBD60020D198 /* AppDelegate.swift in Sources */,
 				D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */,
 			);
@@ -298,6 +325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XY62SV3XGC;
 				INFOPLIST_FILE = BrainDot/Info.plist;
@@ -305,6 +333,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BrainDot/BrainDot-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -314,6 +344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XY62SV3XGC;
 				INFOPLIST_FILE = BrainDot/Info.plist;
@@ -321,6 +352,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BrainDot/BrainDot-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

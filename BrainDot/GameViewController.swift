@@ -12,15 +12,109 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var tipLabel: UILabel!
+    var bubbleViewContainerView: UIView!
+    var effectView: UIVisualEffectView!
+    var animator: UIDynamicAnimator!
+    var bubbleViewStopAttachments: Array<UIAttachmentBehavior>! = Array()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gameData = self.createGameData()
-        let scene = MainGameScene(size: self.view.frame.size, data: gameData)
-        if let view = self.view as? SKView {
-            view.presentScene(scene)
-            view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
+        self.createCompoent()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        for behavior in self.bubbleViewStopAttachments {
+            self.animator.addBehavior(behavior)
+        }
+    }
+    
+    func createCompoent() {
+        self.createEffectView()
+        self.createBubbleViews()
+        self.createDynamic()
+        
+        CATransaction.begin()
+        UIView.setAnimationRepeatCount(MAXFLOAT)
+        UIView.animateKeyframes(withDuration: 5, delay: 0, options: [.calculationModeCubic,.repeat], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
+                self.tipLabel.alpha = 0
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                self.tipLabel.alpha = 1
+            })
+        }, completion: nil)
+        CATransaction.commit()
+    }
+    
+    func createEffectView() {
+        let effect = UIBlurEffect(style: .light)
+        let effectView = UIVisualEffectView(effect: effect)
+        self.view.addSubview(effectView)
+        self.view.sendSubview(toBack: effectView)
+        effectView.frame = self.view.bounds
+        effectView.alpha = 0.7
+        effectView.backgroundColor = .clear
+        self.effectView = effectView
+    }
+    
+    func createBubbleViews() {
+        let containerView = UIView(frame: self.view.bounds)
+        containerView.backgroundColor = .white
+        self.view.insertSubview(containerView, belowSubview: self.effectView)
+        self.bubbleViewContainerView = containerView
+        
+        let bubbleViewConfig: Array = [
+            ["size":CGSize(width: 100, height: 100),
+             "color": "99FFB6",
+             "centerOffset": CGPoint(x: -56.5, y: 76.5)],
+            ["size":CGSize(width: 125, height: 125),
+             "color": "FCFF99",
+             "centerOffset": CGPoint(x: 56, y: -61)],
+            ["size":CGSize(width: 160, height: 160),
+             "color": "FF99B0",
+             "centerOffset": CGPoint(x: 55.5, y: 56.5)],
+            ["size": CGSize(width: 200, height: 200),
+             "color": "49EAF7",
+             "centerOffset": CGPoint(x: -24.5, y: -23.5)]
+        ]
+        for dict in bubbleViewConfig {
+            let size:CGSize = dict["size"] as! CGSize
+            let colorHex:String = dict["color"] as! String
+            let centerOffset:CGPoint = dict["centerOffset"] as! CGPoint
+            let bubbleview = self.createBubbleView(size: size, colorHex: colorHex)
+            self.bubbleViewContainerView.addSubview(bubbleview)
+            bubbleview.center = self.view.center
+            bubbleview.center.x += centerOffset.x
+            bubbleview.center.y += centerOffset.y
+        }
+    }
+    
+    func createBubbleView(size: CGSize, colorHex: String) -> BubbleView{
+        let bubbleView = BubbleView(frame: CGRect.zero)
+        bubbleView.frame.size = size
+        bubbleView.color = UIColor(colorHex: colorHex)
+        bubbleView.backgroundColor = .clear
+        return bubbleView
+    }
+    
+    func createDynamic() {
+        self.animator = UIDynamicAnimator(referenceView: self.bubbleViewContainerView)
+        for view in self.bubbleViewContainerView.subviews {
+            let attachment = UIAttachmentBehavior(item: view, attachedToAnchor: view.center)
+            attachment.length = 20
+            attachment.damping = 0
+            attachment.frequency = 0.3
+            self.bubbleViewStopAttachments.append(attachment)
+            let randomOffset = CGFloat(arc4random() % 30)
+//            if randomOffset < 15 {
+//                randomOffset = -CGFloat(arc4random() % 30)
+//                if (randomOffset > -10) {
+//                    randomOffset = -10
+//                }
+//            }
+            view.center.y -= randomOffset
         }
     }
     
