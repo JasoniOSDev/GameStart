@@ -106,22 +106,22 @@ class MainGameScene: SKScene {
     
     func createComponent(){
         //创建球
-        if let balls = self.data.balls {
-            for ball in balls {
-                let shapeNode = self.createBallWith(ball: ball)
-                self.addChild(shapeNode)
-                self.balls.append(shapeNode)
-            }
-        }
-        
-        //创建障碍物
-        if let barriers = self.data.barriers {
-            for barrier in barriers {
-                if let shapeNode = self.createBarrierWith(barrier: barrier) {
-                    self.addChild(shapeNode)
-                }
-            }
-        }
+//        if let balls = self.data.balls {
+//            for ball in balls {
+//                let shapeNode = self.createBallWith(ball: ball)
+//                self.addChild(shapeNode)
+//                self.balls.append(shapeNode)
+//            }
+//        }
+//        
+//        //创建障碍物
+//        if let barriers = self.data.barriers {
+//            for barrier in barriers {
+//                if let shapeNode = self.createBarrierWith(barrier: barrier) {
+//                    self.addChild(shapeNode)
+//                }
+//            }
+//        }
         
         //创建测试node
 //        let textNode = SKSpriteNode(texture: SKTexture(imageNamed: "texture"))

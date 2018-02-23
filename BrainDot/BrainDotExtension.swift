@@ -68,5 +68,48 @@ extension UIView {
             return self.left + self.frame.width
         }
     }
+    
+    var midY: CGFloat {
+        set {
+            self.top = newValue - self.frame.height / 2
+        }
+        get {
+            return self.frame.midY
+        }
+    }
+    
+    var midX: CGFloat {
+        set {
+            self.left = newValue - self.frame.height / 2
+        }
+        get {
+            return self.frame.midX
+        }
+    }
+    
+    var height: CGFloat {
+        set {
+            self.frame.size = CGSize(width: self.frame.width, height: newValue)
+        }
+        get {
+            return self.frame.height
+        }
+    }
+    
+    var width: CGFloat {
+        set {
+            self.frame.size = CGSize(width: newValue, height: self.frame.height)
+        }
+        get {
+            return self.frame.width
+        }
+    }
 }
+
+//func adjust(with value: CGFloat) -> CGFloat {
+//    if UIScreen.main.bounds.width < 375 {
+//        return value * .9
+//    }
+//    return value
+//}
 

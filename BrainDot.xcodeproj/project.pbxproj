@@ -18,12 +18,13 @@
 		D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA9E2011BBD60020D198 /* LaunchScreen.storyboard */; };
 		D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA72011BBEF0020D198 /* MainGameScene.swift */; };
 		D57DAAAA2011BC190020D198 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA92011BC190020D198 /* GameData.swift */; };
-		D57DAAAC2012153B0020D198 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = D57DAAAB2012153A0020D198 /* texture.png */; };
 		D57EBB11203DAC3D00AB0F65 /* GameMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */; };
-		D57EBB16203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB15203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift */; };
+		D57EBB16203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB15203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift */; };
+		D5A7ECC4203FFF1500D1FCA6 /* GameSecondMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7ECC3203FFF1400D1FCA6 /* GameSecondMenuCollectionViewCell.swift */; };
+		D5A7ECC620400A3300D1FCA6 /* GameMenuSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7ECC520400A3300D1FCA6 /* GameMenuSceneView.swift */; };
 		D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56534203BCE2E007FF406 /* BubbleView.swift */; };
 		D5D5653C203BE986007FF406 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5D5653B203BE986007FF406 /* CoreGraphics.framework */; };
-		D5D56541203D38EF007FF406 /* UIColor+BrainDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */; };
+		D5D56541203D38EF007FF406 /* BrainDotExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56540203D38EF007FF406 /* BrainDotExtension.swift */; };
 		D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,13 +44,14 @@
 		D57DAAA12011BBD60020D198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D57DAAA72011BBEF0020D198 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
 		D57DAAA92011BC190020D198 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
-		D57DAAAB2012153A0020D198 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
 		D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuViewController.swift; sourceTree = "<group>"; };
-		D57EBB15203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		D57EBB15203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFirstMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		D5A7ECC3203FFF1400D1FCA6 /* GameSecondMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSecondMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		D5A7ECC520400A3300D1FCA6 /* GameMenuSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuSceneView.swift; sourceTree = "<group>"; };
 		D5D56534203BCE2E007FF406 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		D5D56536203BE8CD007FF406 /* BrainDot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrainDot-Bridging-Header.h"; sourceTree = "<group>"; };
 		D5D5653B203BE986007FF406 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+BrainDot.swift"; sourceTree = "<group>"; };
+		D5D56540203D38EF007FF406 /* BrainDotExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainDotExtension.swift; sourceTree = "<group>"; };
 		D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainDotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				D57EBB12203DC62900AB0F65 /* Menu */,
-				D57DAAAB2012153A0020D198 /* texture.png */,
 				D57DAAA72011BBEF0020D198 /* MainGameScene.swift */,
 				D57DAA8F2011BBD60020D198 /* AppDelegate.swift */,
 				D57DAA912011BBD60020D198 /* GameScene.sks */,
@@ -106,13 +107,13 @@
 				D57DAA972011BBD60020D198 /* GameViewController.swift */,
 				D57DAA992011BBD60020D198 /* Main.storyboard */,
 				D5D56534203BCE2E007FF406 /* BubbleView.swift */,
-				D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */,
+				D5D56540203D38EF007FF406 /* BrainDotExtension.swift */,
 				D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */,
-				D57DAA9C2011BBD60020D198 /* Assets.xcassets */,
 				D57DAA9E2011BBD60020D198 /* LaunchScreen.storyboard */,
 				D57DAAA12011BBD60020D198 /* Info.plist */,
 				D57DAAA92011BC190020D198 /* GameData.swift */,
 				D5D56536203BE8CD007FF406 /* BrainDot-Bridging-Header.h */,
+				D57DAA9C2011BBD60020D198 /* Assets.xcassets */,
 			);
 			path = BrainDot;
 			sourceTree = "<group>";
@@ -120,6 +121,7 @@
 		D57EBB12203DC62900AB0F65 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				D5A7ECC7204028EC00D1FCA6 /* Model */,
 				D57EBB14203DC63B00AB0F65 /* View */,
 				D57EBB13203DC63300AB0F65 /* ViewController */,
 			);
@@ -137,9 +139,18 @@
 		D57EBB14203DC63B00AB0F65 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D57EBB15203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift */,
+				D57EBB15203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift */,
+				D5A7ECC3203FFF1400D1FCA6 /* GameSecondMenuCollectionViewCell.swift */,
+				D5A7ECC520400A3300D1FCA6 /* GameMenuSceneView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D5A7ECC7204028EC00D1FCA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D5D5653A203BE985007FF406 /* Frameworks */ = {
@@ -219,7 +230,6 @@
 				D57DAA9D2011BBD60020D198 /* Assets.xcassets in Resources */,
 				D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */,
 				D57DAA942011BBD60020D198 /* Actions.sks in Resources */,
-				D57DAAAC2012153B0020D198 /* texture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,13 +297,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */,
+				D5A7ECC4203FFF1500D1FCA6 /* GameSecondMenuCollectionViewCell.swift in Sources */,
 				D57DAA962011BBD60020D198 /* GameScene.swift in Sources */,
 				D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */,
 				D57DAAAA2011BC190020D198 /* GameData.swift in Sources */,
 				D57EBB11203DAC3D00AB0F65 /* GameMenuViewController.swift in Sources */,
+				D5A7ECC620400A3300D1FCA6 /* GameMenuSceneView.swift in Sources */,
 				D57DAA982011BBD60020D198 /* GameViewController.swift in Sources */,
-				D57EBB16203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift in Sources */,
-				D5D56541203D38EF007FF406 /* UIColor+BrainDot.swift in Sources */,
+				D57EBB16203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift in Sources */,
+				D5D56541203D38EF007FF406 /* BrainDotExtension.swift in Sources */,
 				D57DAA902011BBD60020D198 /* AppDelegate.swift in Sources */,
 				D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */,
 			);

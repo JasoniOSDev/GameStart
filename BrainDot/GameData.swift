@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import RealmSwift
 
 struct GameMenu {
     var iconImageName: String!
@@ -119,7 +120,46 @@ struct DrawBarrier {
     }
 }
 
-struct GameData {
-    var balls: Array<Ball>! = Array<Ball>()
-    var barriers: Array<Barrier>! = Array<Barrier>()
+enum BarrierType: Int {
+    case rectangle = 0
+    case square = 1
+    case triangle = 2
 }
+
+enum SceneBorder: Int {
+    case top = 1
+    case bottom = 2
+    case left = 4
+    case right = 8
+}
+
+class BarrierObject: Object {
+    @objc dynamic var type = 0
+    @objc dynamic var size: NSValue?
+    @objc dynamic var position: NSValue?
+}
+
+class BallObject: Object {
+    @objc dynamic var size: NSValue?
+    @objc dynamic var colorHex = ""
+    @objc dynamic var position: NSValue?
+}
+
+class SceneDataGroup: Object {
+    let sceneDatas = List<GameData>()
+    @objc dynamic var lock = true
+    @objc dynamic var groupIndex = 0
+}
+
+class GameData: Object {
+    let balls = List<BallObject>()
+    let barriers = List<BarrierObject>()
+    @objc dynamic var userCustom = false //是否是用户自定义
+    @objc dynamic var userFavorite = false //用户是否收藏
+    @objc dynamic var userConquer = false //是否已经通过
+    @objc dynamic var border = 0
+    @objc dynamic var sceneID = ""
+    @objc dynamic var index = 0
+    let parentGroup = LinkingObjects(fromType: SceneDataGroup.self, property: "sceneDatas")
+}
+
