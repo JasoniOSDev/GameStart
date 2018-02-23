@@ -8,6 +8,12 @@
 
 import SpriteKit
 
+struct GameMenu {
+    var iconImageName: String!
+    var menuName: String!
+    var menuID: Int!
+}
+
 struct Ball {
     var color: UIColor! = .black
     var radius: CGFloat = 10

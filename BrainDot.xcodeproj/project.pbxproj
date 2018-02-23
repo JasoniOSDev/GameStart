@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BF1078F632888F6332694DD /* Pods_BrainDot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2459015FF5B1A42C519F6ED3 /* Pods_BrainDot.framework */; };
 		D57DAA902011BBD60020D198 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAA8F2011BBD60020D198 /* AppDelegate.swift */; };
 		D57DAA922011BBD60020D198 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA912011BBD60020D198 /* GameScene.sks */; };
 		D57DAA942011BBD60020D198 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D57DAA932011BBD60020D198 /* Actions.sks */; };
@@ -18,6 +19,8 @@
 		D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA72011BBEF0020D198 /* MainGameScene.swift */; };
 		D57DAAAA2011BC190020D198 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA92011BC190020D198 /* GameData.swift */; };
 		D57DAAAC2012153B0020D198 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = D57DAAAB2012153A0020D198 /* texture.png */; };
+		D57EBB11203DAC3D00AB0F65 /* GameMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */; };
+		D57EBB16203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB15203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift */; };
 		D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56534203BCE2E007FF406 /* BubbleView.swift */; };
 		D5D5653C203BE986007FF406 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5D5653B203BE986007FF406 /* CoreGraphics.framework */; };
 		D5D56541203D38EF007FF406 /* UIColor+BrainDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56540203D38EF007FF406 /* UIColor+BrainDot.swift */; };
@@ -25,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16C56FE971C222D39B93F8F0 /* Pods-BrainDot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrainDot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot.release.xcconfig"; sourceTree = "<group>"; };
+		2459015FF5B1A42C519F6ED3 /* Pods_BrainDot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BrainDot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B8F8C968304CC598DCCBE8A /* Pods-BrainDot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrainDot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot.debug.xcconfig"; sourceTree = "<group>"; };
 		D57DAA8C2011BBD60020D198 /* BrainDot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrainDot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57DAA8F2011BBD60020D198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D57DAA912011BBD60020D198 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -38,6 +44,8 @@
 		D57DAAA72011BBEF0020D198 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
 		D57DAAA92011BC190020D198 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		D57DAAAB2012153A0020D198 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuViewController.swift; sourceTree = "<group>"; };
+		D57EBB15203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5D56534203BCE2E007FF406 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		D5D56536203BE8CD007FF406 /* BrainDot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrainDot-Bridging-Header.h"; sourceTree = "<group>"; };
 		D5D5653B203BE986007FF406 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,18 +59,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5D5653C203BE986007FF406 /* CoreGraphics.framework in Frameworks */,
+				9BF1078F632888F6332694DD /* Pods_BrainDot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49CD817618F47869703759F2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B8F8C968304CC598DCCBE8A /* Pods-BrainDot.debug.xcconfig */,
+				16C56FE971C222D39B93F8F0 /* Pods-BrainDot.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D57DAA832011BBD60020D198 = {
 			isa = PBXGroup;
 			children = (
 				D57DAA8E2011BBD60020D198 /* BrainDot */,
 				D57DAA8D2011BBD60020D198 /* Products */,
 				D5D5653A203BE985007FF406 /* Frameworks */,
+				49CD817618F47869703759F2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +96,7 @@
 		D57DAA8E2011BBD60020D198 /* BrainDot */ = {
 			isa = PBXGroup;
 			children = (
+				D57EBB12203DC62900AB0F65 /* Menu */,
 				D57DAAAB2012153A0020D198 /* texture.png */,
 				D57DAAA72011BBEF0020D198 /* MainGameScene.swift */,
 				D57DAA8F2011BBD60020D198 /* AppDelegate.swift */,
@@ -97,10 +117,36 @@
 			path = BrainDot;
 			sourceTree = "<group>";
 		};
+		D57EBB12203DC62900AB0F65 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				D57EBB14203DC63B00AB0F65 /* View */,
+				D57EBB13203DC63300AB0F65 /* ViewController */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		D57EBB13203DC63300AB0F65 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D57EBB14203DC63B00AB0F65 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D57EBB15203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D5D5653A203BE985007FF406 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				D5D5653B203BE986007FF406 /* CoreGraphics.framework */,
+				2459015FF5B1A42C519F6ED3 /* Pods_BrainDot.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,9 +158,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D57DAAA42011BBD60020D198 /* Build configuration list for PBXNativeTarget "BrainDot" */;
 			buildPhases = (
+				224F1791A7BB2BA6C9F0C58E /* [CP] Check Pods Manifest.lock */,
 				D57DAA882011BBD60020D198 /* Sources */,
 				D57DAA892011BBD60020D198 /* Frameworks */,
 				D57DAA8A2011BBD60020D198 /* Resources */,
+				399EC45CF8945BFFB1AD685E /* [CP] Embed Pods Frameworks */,
+				9AE66211DBDB46BF20B1A653 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,6 +225,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		224F1791A7BB2BA6C9F0C58E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BrainDot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		399EC45CF8945BFFB1AD685E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AE66211DBDB46BF20B1A653 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D57DAA882011BBD60020D198 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -185,7 +290,9 @@
 				D57DAA962011BBD60020D198 /* GameScene.swift in Sources */,
 				D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */,
 				D57DAAAA2011BC190020D198 /* GameData.swift in Sources */,
+				D57EBB11203DAC3D00AB0F65 /* GameMenuViewController.swift in Sources */,
 				D57DAA982011BBD60020D198 /* GameViewController.swift in Sources */,
+				D57EBB16203DC65D00AB0F65 /* GameMenuCollectionViewCell.swift in Sources */,
 				D5D56541203D38EF007FF406 /* UIColor+BrainDot.swift in Sources */,
 				D57DAA902011BBD60020D198 /* AppDelegate.swift in Sources */,
 				D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */,
@@ -323,6 +430,7 @@
 		};
 		D57DAAA52011BBD60020D198 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B8F8C968304CC598DCCBE8A /* Pods-BrainDot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -342,6 +450,7 @@
 		};
 		D57DAAA62011BBD60020D198 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16C56FE971C222D39B93F8F0 /* Pods-BrainDot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

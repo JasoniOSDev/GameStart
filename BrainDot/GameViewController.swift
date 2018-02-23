@@ -46,6 +46,10 @@ class GameViewController: UIViewController {
             })
         }, completion: nil)
         CATransaction.commit()
+        
+        for subView in self.view.subviews {
+            subView.isUserInteractionEnabled = false
+        }
     }
     
     func createEffectView() {
@@ -115,6 +119,36 @@ class GameViewController: UIViewController {
 //                }
 //            }
             view.center.y -= randomOffset
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        self.view.isUserInteractionEnabled = false
+        //开始游戏
+        for behavior in self.bubbleViewStopAttachments {
+            behavior.anchorPoint.y = -200
+            if behavior.anchorPoint.x <= self.view.center.x {
+                behavior.anchorPoint.x -= CGFloat(arc4random() % 200)
+            } else {
+                behavior.anchorPoint.x += CGFloat(arc4random() % 200)
+            }
+        }
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: [.calculationModeLinear,.beginFromCurrentState], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0 / 3.0, animations: {
+                self.titleLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.tipLabel.alpha = 0
+            })
+            UIView.addKeyframe(withRelativeStartTime: 1.0 / 3.0, relativeDuration: 1.0 / 6.0, animations: {
+                self.titleLabel.transform = CGAffineTransform.identity
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                self.titleLabel.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+                self.titleLabel.frame.origin = CGPoint(x: 30, y: 20)
+            })
+        }) { _ in
+            let menuViewController = GameMenuViewController()
+            self.present(menuViewController, animated: false, completion: nil)
         }
     }
     

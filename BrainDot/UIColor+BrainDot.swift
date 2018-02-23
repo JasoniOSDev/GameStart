@@ -33,3 +33,40 @@ extension UIColor {
     }
 }
 
+extension UIView {
+    var left: CGFloat {
+        set {
+            self.frame.origin = CGPoint(x: left, y: self.frame.minY)
+        }
+        get {
+            return self.frame.minX
+        }
+    }
+    
+    var top: CGFloat {
+        set {
+            self.frame.origin = CGPoint(x: self.left, y: top)
+        }
+        get {
+            return self.frame.minY
+        }
+    }
+    var bottom: CGFloat {
+        set {
+            self.top = newValue - self.frame.height
+        }
+        get {
+            return self.top + self.frame.height
+        }
+    }
+    
+    var right: CGFloat {
+        set {
+            self.left = newValue - self.frame.width
+        }
+        get {
+            return self.left + self.frame.width
+        }
+    }
+}
+
