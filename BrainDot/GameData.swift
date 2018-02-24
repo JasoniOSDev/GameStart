@@ -135,14 +135,18 @@ enum SceneBorder: Int {
 
 class BarrierObject: Object {
     @objc dynamic var type = 0
-    @objc dynamic var size: NSValue?
-    @objc dynamic var position: NSValue?
+    @objc dynamic var sizeWidth = 0.0
+    @objc dynamic var sizeHeight = 0.0
+    @objc dynamic var positionX = 0.0
+    @objc dynamic var positionY = 0.0
 }
 
 class BallObject: Object {
-    @objc dynamic var size: NSValue?
     @objc dynamic var colorHex = ""
-    @objc dynamic var position: NSValue?
+    @objc dynamic var sizeWidth = 0.0
+    @objc dynamic var sizeHeight = 0.0
+    @objc dynamic var positionX = 0.0
+    @objc dynamic var positionY = 0.0
 }
 
 class SceneDataGroup: Object {
@@ -160,6 +164,7 @@ class GameData: Object {
     @objc dynamic var border = 0
     @objc dynamic var sceneID = ""
     @objc dynamic var index = 0
+    @objc dynamic var lock = true
     let parentGroup = LinkingObjects(fromType: SceneDataGroup.self, property: "sceneDatas")
 }
 

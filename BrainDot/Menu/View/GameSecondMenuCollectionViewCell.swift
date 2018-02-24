@@ -12,6 +12,7 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
     
     var sceneGroup: SceneDataGroup?
     var sceneViews: Array<GameMenuSceneView> = Array()
+    var sceneViewsContainerView: UIView!
     
     var tipIconView: UIImageView!
     var tipLabel: UILabel!
@@ -20,9 +21,11 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
     var lockContainerView: UIView!
     var lockIconImageView: UIImageView!
     
+    var indexLabel: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.createCompoent()
+        self.createComponent()
     }
     
     override func layoutSubviews() {
@@ -41,7 +44,19 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
             sceneViewBottom = view.bottom
         }
         
+        if let view = self.sceneViews.first {
+            self.indexLabel.left = 15
+            self.indexLabel.top = 12
+            self.lockContainerView.frame = view.convert(view.bounds, to: self.lockContainerView.superview)
+        }
+        
         refreshTipRegion(sceneViewBottom)
+        if !self.lockContainerView.isHidden {
+            self.indexLabel.textColor = .white
+            self.lockIconImageView.center = CGPoint(x: self.lockContainerView.width / 2, y: self.lockContainerView.height / 2)
+        } else {
+            self.indexLabel.textColor = UIColor(colorHex: "6F6F6F")
+        }
     }
     
     fileprivate func refreshTipRegion(_ sceneViewBottom: CGFloat) {
@@ -60,19 +75,29 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
         self.tipRegion.top = sceneViewBottom + 6.0
     }
     
-    private func createCompoent() {
+    private func createComponent() {
         self.createSceneView()
         self.createTipRegion()
         self.createLockRegion()
+        self.createIndexLabel()
     }
     
     private func createSceneView() {
-        for _ in 0..<3 {
+        let containerView = UIView(frame: self.bounds)
+        containerView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+        containerView.backgroundColor = .clear
+        self.contentView.addSubview(containerView)
+        self.sceneViewsContainerView = containerView
+        
+        for _ in 0 ..< 3 {
             let view = GameMenuSceneView()
             view.isHidden = true
-            self.addSubview(view)
-            sceneViews.append(view)
+            view.showLockContainerView = false
+            view.showIndexLabel = false
+            containerView.addSubview(view)
+            self.sceneViews.append(view)
         }
+        self.sceneViews = self.sceneViews.reversed()
     }
     
     private func createTipRegion() {
@@ -92,7 +117,7 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
         containerView.backgroundColor = .clear
         containerView.addSubview(imageView)
         containerView.addSubview(label)
-        self.addSubview(containerView)
+        self.contentView.addSubview(containerView)
         self.tipRegion = containerView
     }
     
@@ -105,11 +130,18 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
         
         let containerView = UIView(frame: self.bounds)
         containerView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-        containerView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         self.lockContainerView = containerView
         
         containerView.addSubview(icon)
-        self.addSubview(containerView)
+        self.contentView.addSubview(containerView)
+    }
+    
+    private func createIndexLabel() {
+        let label = UILabel()
+        label.textColor = UIColor(colorHex: "6F6F6F")
+        label.font = UIFont.boldSystemFont(ofSize: 26)
+        self.contentView.addSubview(label)
+        self.indexLabel = label
     }
     
     public func setupContent(with group: SceneDataGroup?) {
@@ -119,6 +151,7 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
         }
         self.setupSceneView(with: sceneGroup)
         self.setupTipRegion(with: sceneGroup)
+        self.setupIndexLabel(with: sceneGroup.sceneDatas.first)
     }
     
     private func setupSceneView(with group: SceneDataGroup) {
@@ -135,7 +168,11 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
                 let view = self.sceneViews[i]
                 view.isHidden = false
                 view.setupView(with: sceneData)
-                view.transform = CGAffineTransform(rotationAngle: CGFloat(3.0 / 180.0 * Double.pi * Double(i * ((i & 1)  == 1 ? 1 : -1))))
+                view.transform = CGAffineTransform.identity
+                if i > 0 {
+                    view.transform = CGAffineTransform(rotationAngle: CGFloat(1.5 / 180.0 * Double.pi * Double((i & 1)  == 1 ? 1 : -1)))
+                    
+                }
             }
         }
     }
@@ -164,6 +201,15 @@ class GameSecondMenuCollectionViewCell: UICollectionViewCell {
             self.tipLabel.text = "\(conquerCount) / \(datas.count)"
         }
         self.tipLabel.sizeToFit()
+    }
+    
+    private func setupIndexLabel(with sceneData: GameData?) {
+        guard let data = sceneData else {
+            self.indexLabel.text = nil
+            return
+        }
+        self.indexLabel.text = "\(data.index)"
+        self.indexLabel.sizeToFit()
     }
     
     required init?(coder aDecoder: NSCoder) {

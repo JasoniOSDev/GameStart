@@ -36,7 +36,7 @@ extension UIColor {
 extension UIView {
     var left: CGFloat {
         set {
-            self.frame.origin = CGPoint(x: left, y: self.frame.minY)
+            self.frame.origin = CGPoint(x: newValue, y: self.frame.minY)
         }
         get {
             return self.frame.minX
@@ -45,7 +45,7 @@ extension UIView {
     
     var top: CGFloat {
         set {
-            self.frame.origin = CGPoint(x: self.left, y: top)
+            self.frame.origin = CGPoint(x: self.left, y: newValue)
         }
         get {
             return self.frame.minY

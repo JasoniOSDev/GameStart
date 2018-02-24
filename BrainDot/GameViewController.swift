@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     var bubbleViewStopAttachments: Array<UIAttachmentBehavior>! = Array()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.createCompoent()
+        self.createComponent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    func createCompoent() {
+    func createComponent() {
         self.createEffectView()
         self.createBubbleViews()
         self.createDynamic()
@@ -124,6 +124,9 @@ class GameViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+        guard self.view.isUserInteractionEnabled, let _ = self.view.window else {
+            return
+        }
         self.view.isUserInteractionEnabled = false
         //开始游戏
         for behavior in self.bubbleViewStopAttachments {

@@ -14,7 +14,7 @@ class GameFirstMenuCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.createCompoent()
+        self.createComponent()
     }
     
     override func layoutSubviews() {
@@ -27,7 +27,7 @@ class GameFirstMenuCollectionViewCell: UICollectionViewCell {
         self.titleLabel.bottom = self.frame.height
     }
     
-    private func createCompoent() {
+    private func createComponent() {
         self.imageView = UIImageView()
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 26)
