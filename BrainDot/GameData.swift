@@ -133,20 +133,38 @@ enum SceneBorder: Int {
     case right = 8
 }
 
-class BarrierObject: Object {
-    @objc dynamic var type = 0
-    @objc dynamic var sizeWidth = 0.0
-    @objc dynamic var sizeHeight = 0.0
-    @objc dynamic var positionX = 0.0
-    @objc dynamic var positionY = 0.0
+enum GameSceneObjectClass: Int {
+    case barrier
+    case ball
 }
 
-class BallObject: Object {
-    @objc dynamic var colorHex = ""
-    @objc dynamic var sizeWidth = 0.0
-    @objc dynamic var sizeHeight = 0.0
-    @objc dynamic var positionX = 0.0
-    @objc dynamic var positionY = 0.0
+class GameSceneObject: Object {
+    @objc dynamic var sizeWidth: CGFloat = 0.0
+    @objc dynamic var sizeHeight: CGFloat = 0.0
+    @objc dynamic var positionXOffset: CGFloat = 0.0
+    @objc dynamic var positionYOffset: CGFloat = 0.0
+    @objc dynamic var colorHex = "000000"
+    
+    func objectClass() -> GameSceneObjectClass {
+        return .barrier
+    }
+}
+
+class BarrierObject: GameSceneObject {
+    @objc dynamic var barrierType = 0
+}
+
+class BallObject: GameSceneObject {
+    
+    override func objectClass() -> GameSceneObjectClass {
+        return .ball
+    }
+}
+
+class UserDrawObject: Object {
+    @objc dynamic var image: UIImage?
+    @objc dynamic var positionXOffset = 0.0
+    @objc dynamic var positionYOffset = 0.0
 }
 
 class SceneDataGroup: Object {
@@ -161,7 +179,7 @@ class GameData: Object {
     @objc dynamic var userCustom = false //是否是用户自定义
     @objc dynamic var userFavorite = false //用户是否收藏
     @objc dynamic var userConquer = false //是否已经通过
-    @objc dynamic var border = 0
+    @objc dynamic var border = SceneBorder.bottom.rawValue
     @objc dynamic var sceneID = ""
     @objc dynamic var index = 0
     @objc dynamic var lock = true

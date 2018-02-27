@@ -13,7 +13,11 @@ class GameThirdMenuCollectionViewCell: UICollectionViewCell {
     var sceneView: GameMenuSceneView!
     var sceneData: GameData? {
         didSet{
-            sceneView.sceneData = self.sceneData
+            if let data = self.sceneData {
+                self.sceneView.setupView(with: data)
+            } else {
+                self.sceneView.sceneData = nil
+            }
         }
     }
     

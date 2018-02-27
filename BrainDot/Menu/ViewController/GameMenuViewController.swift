@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SpriteKit
+import RealmSwift
 
 class GameMenuViewController: UIViewController {
 
@@ -22,6 +24,8 @@ class GameMenuViewController: UIViewController {
     
     var selectedGroup: SceneDataGroup?
     
+    var gameView: SKView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -34,6 +38,16 @@ class GameMenuViewController: UIViewController {
         self.createSecondMenuCollectionView()
         self.createThirdMenuCollectionView()
         self.createTitleLabel()
+        self.createGameView()
+    }
+    
+    func createGameView() {
+        let view = SKView(frame: self.view.bounds)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(view)
+        view.backgroundColor = .clear
+        view.isHidden = true
+        self.gameView = view
     }
     
     func loadSceneGroupList(with menu:GameMenu) {
@@ -43,6 +57,30 @@ class GameMenuViewController: UIViewController {
             group.groupIndex = i
             group.lock = i != 0
             let sceneData = GameData()
+            let barrier = BarrierObject()
+            barrier.barrierType = BarrierType.rectangle.rawValue
+            barrier.sizeHeight = 0.25
+            barrier.sizeWidth = 0.25
+            barrier.positionXOffset = 0.375
+            barrier.positionYOffset = 0.375
+            sceneData.barriers.append(barrier)
+            
+            let ball = BallObject()
+            ball.sizeWidth = 0.1
+            ball.sizeHeight = 0.1
+            ball.positionXOffset = 0
+            ball.positionYOffset = 0
+            ball.colorHex = "4A90E2"
+            sceneData.balls.append(ball)
+            
+            let ball2 = BallObject()
+            ball2.sizeWidth = 0.1
+            ball2.sizeHeight = 0.1
+            ball2.positionXOffset = 0.2
+            ball2.positionYOffset = 0.2
+            ball2.colorHex = "4A90E2"
+            sceneData.balls.append(ball2)
+            
             sceneData.lock = false
             group.sceneDatas.append(sceneData)
             for _ in 0 ..< 10 {
@@ -387,6 +425,47 @@ extension GameMenuViewController
     }
     
     fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let group = self.selectedGroup, group.sceneDatas.count > indexPath.row else {
+            return
+        }
+        let sceneData = group.sceneDatas[indexPath.row]
+        guard !sceneData.lock else {
+            return
+        }
+        let scene = MainGameScene(size: self.view.frame.size, data: sceneData)
+        scene.gameDelegate = self
+        self.view.bringSubview(toFront: self.gameView)
+        self.gameView.isHidden = false
+        self.gameView.presentScene(scene)
+    }
+}
+
+extension GameMenuViewController: MainGameSceneDelegate {
+    
+    func gameFinish(sceneData: GameData, balls: Array<SKShapeNode>, barriers: Array<SKShapeNode>, drawNode: Array<SKSpriteNode>) {
+        guard let group = self.selectedGroup, let groupList = self.sceneGroupList, let index = group.sceneDatas.index(of: sceneData), let indexOfGroup = groupList.index(of: group) else {
+            return
+        }
+        
+        let realm = try! Realm()
+        try! realm.write {
+            sceneData.userConquer = true
+        }
+        
+        
+        var nextSceneData: GameData?
+        
+        if (index + 1) == group.sceneDatas.count {
+            if (indexOfGroup + 1) == groupList.count {
+                return
+            } else {
+                let nextGroup = groupList[indexOfGroup + 1]
+                nextSceneData = nextGroup.sceneDatas.first
+            }
+        } else {
+            nextSceneData = group.sceneDatas[index + 1]
+        }
         
     }
+    
 }

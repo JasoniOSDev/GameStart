@@ -30,6 +30,10 @@ class GameMenuSceneView: UIView {
         }
     }
     
+    var favoriteIconImageView: UIImageView!
+    var conquerImageView: UIImageView!
+    var sceneSnapshotView: GameSceneSnapShotView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -44,6 +48,7 @@ class GameMenuSceneView: UIView {
         super.layoutSubviews()
         
         self.refreshLockContainerView()
+        self.refreshIcons()
     }
     
     private func refreshLockContainerView() {
@@ -54,6 +59,20 @@ class GameMenuSceneView: UIView {
         self.lockContainerView.isHidden = !data.lock
         self.lockIconImageView.frame.size = CGSize(width: 21 * self.lockContainerView.width / 319, height: 31 * self.lockContainerView.height / 180)
         self.lockIconImageView.center = CGPoint(x: self.lockContainerView.width / 2, y: self.lockContainerView.height / 2)
+    }
+    
+    private func refreshIcons() {
+        guard let sceneData = self.sceneData else {
+            self.favoriteIconImageView.isHidden = true
+            self.conquerImageView.isHidden = true
+            return
+        }
+        self.favoriteIconImageView.isHidden = !sceneData.userFavorite
+        self.conquerImageView.isHidden = !sceneData.userConquer
+        self.favoriteIconImageView.left = 10
+        self.favoriteIconImageView.bottom = self.height - 10
+        self.conquerImageView.right = self.width - 15
+        self.conquerImageView.top = 15
     }
     
     private func refreshIndexLabel() {
@@ -78,6 +97,34 @@ class GameMenuSceneView: UIView {
             self.createLockRegion()
             self.createIndexLabel()
         }
+        self.createGameSceneSnapshotView()
+        self.createFavoriteImageView()
+        self.createConquerImageView()
+    }
+    
+    private func createGameSceneSnapshotView() {
+        let view = GameSceneSnapShotView(frame: self.bounds)
+        view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        view.backgroundColor = .white
+        self.addSubview(view)
+        self.sceneSnapshotView = view
+    }
+    
+    private func createFavoriteImageView() {
+        let imageView = UIImageView(image: UIImage(named: "favorite_icon"))
+        imageView.sizeToFit()
+        imageView.contentMode = .scaleAspectFit
+        self.addSubview(imageView)
+        imageView.isHidden = true
+        self.favoriteIconImageView = imageView
+    }
+    
+    private func createConquerImageView() {
+        let imageView = UIImageView(image: UIImage(named: "user_conquer"))
+        imageView.sizeToFit()
+        self.addSubview(imageView)
+        imageView.isHidden = true
+        self.conquerImageView = imageView
     }
     
     private func createLockRegion() {
@@ -113,6 +160,7 @@ class GameMenuSceneView: UIView {
     }
     
     public func setupView(with data: GameData) {
-        
+        self.sceneData = data
+        self.sceneSnapshotView.setupContentWithSceneData(sceneData: data)
     }
 }

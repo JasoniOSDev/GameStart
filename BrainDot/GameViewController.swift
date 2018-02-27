@@ -152,6 +152,11 @@ class GameViewController: UIViewController {
         }) { _ in
             let menuViewController = GameMenuViewController()
             self.present(menuViewController, animated: false, completion: nil)
+            
+            for view in self.view.subviews {
+                view.isHidden = true
+            }
+            self.view.backgroundColor = .clear
         }
     }
     
@@ -169,5 +174,14 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+extension GameViewController {
+    //presentScene
+    func present(with scene:SKScene) {
+        if let skView = self.view as? SKView {
+            skView.presentScene(scene)
+        }
     }
 }
