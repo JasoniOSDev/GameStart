@@ -6,7 +6,14 @@
 //  Copyright © 2018年 陈杰生. All rights reserved.
 //
 
-import UIKit
+import SpriteKit
+import RealmSwift
+
+struct GameMenu {
+    var iconImageName: String!
+    var menuName: String!
+    var menuID: Int!
+}
 
 struct Ball {
     var color: UIColor! = .black
@@ -21,6 +28,22 @@ struct Barrier {
     var stokeColor: UIColor! = .black
     var lineWidth: CGFloat = 2
     
+}
+
+struct DrawPan {
+    var textureName: String!
+    var texture: SKTexture{
+        get {
+            return SKTexture(imageNamed: self.textureName)
+        }
+    }
+    var panName: String!
+    var displayTextureName: String!
+    var displayTexture: SKTexture {
+        get {
+            return SKTexture(imageNamed: self.displayTextureName)
+        }
+    }
 }
 
 struct DrawBarrier {
@@ -97,7 +120,69 @@ struct DrawBarrier {
     }
 }
 
-struct GameData {
-    var balls: Array<Ball>! = Array<Ball>()
-    var barriers: Array<Barrier>! = Array<Barrier>()
+enum BarrierType: Int {
+    case rectangle = 0
+    case square = 1
+    case triangle = 2
 }
+
+enum SceneBorder: Int {
+    case top = 1
+    case bottom = 2
+    case left = 4
+    case right = 8
+}
+
+enum GameSceneObjectClass: Int {
+    case barrier
+    case ball
+}
+
+class GameSceneObject: Object {
+    @objc dynamic var sizeWidth: CGFloat = 0.0
+    @objc dynamic var sizeHeight: CGFloat = 0.0
+    @objc dynamic var positionXOffset: CGFloat = 0.0
+    @objc dynamic var positionYOffset: CGFloat = 0.0
+    @objc dynamic var colorHex = "000000"
+    
+    func objectClass() -> GameSceneObjectClass {
+        return .barrier
+    }
+}
+
+class BarrierObject: GameSceneObject {
+    @objc dynamic var barrierType = 0
+}
+
+class BallObject: GameSceneObject {
+    
+    override func objectClass() -> GameSceneObjectClass {
+        return .ball
+    }
+}
+
+class UserDrawObject: Object {
+    @objc dynamic var image: UIImage?
+    @objc dynamic var positionXOffset = 0.0
+    @objc dynamic var positionYOffset = 0.0
+}
+
+class SceneDataGroup: Object {
+    let sceneDatas = List<GameData>()
+    @objc dynamic var lock = true
+    @objc dynamic var groupIndex = 0
+}
+
+class GameData: Object {
+    let balls = List<BallObject>()
+    let barriers = List<BarrierObject>()
+    @objc dynamic var userCustom = false //是否是用户自定义
+    @objc dynamic var userFavorite = false //用户是否收藏
+    @objc dynamic var userConquer = false //是否已经通过
+    @objc dynamic var border = SceneBorder.bottom.rawValue
+    @objc dynamic var sceneID = ""
+    @objc dynamic var index = 0
+    @objc dynamic var lock = true
+    let parentGroup = LinkingObjects(fromType: SceneDataGroup.self, property: "sceneDatas")
+}
+
