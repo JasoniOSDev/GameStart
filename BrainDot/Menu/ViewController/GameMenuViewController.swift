@@ -24,7 +24,7 @@ class GameMenuViewController: UIViewController {
     
     var selectedGroup: SceneDataGroup?
     
-    var gameView: SKView!
+    var gameView: GameView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,8 @@ class GameMenuViewController: UIViewController {
     }
     
     func createGameView() {
-        let view = SKView(frame: self.view.bounds)
+        let view = GameView(frame: self.view.bounds)
+        view.gameViewDelegate = self
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(view)
         view.backgroundColor = .clear
@@ -425,7 +426,7 @@ extension GameMenuViewController
     }
     
     fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let group = self.selectedGroup, group.sceneDatas.count > indexPath.row else {
+        guard let group = self.selectedGroup, group.sceneDatas.count > indexPath.row,let gameView = self.gameView else {
             return
         }
         let sceneData = group.sceneDatas[indexPath.row]
@@ -434,16 +435,36 @@ extension GameMenuViewController
         }
         let scene = MainGameScene(size: self.view.frame.size, data: sceneData)
         scene.gameDelegate = self
-        self.view.bringSubview(toFront: self.gameView)
-        self.gameView.isHidden = false
-        self.gameView.presentScene(scene)
+        self.view.bringSubview(toFront: gameView)
+        gameView.isHidden = false
+        gameView.presentScene(scene)
     }
 }
 
-extension GameMenuViewController: MainGameSceneDelegate {
+extension GameMenuViewController: MainGameSceneDelegate,GameViewDelegate {
+    
+    func gameViewBackButtonClicked(view: GameView) {
+        view.presentScene(nil)
+        view.isHidden = true
+    }
+    
+    func gameViewRetryButtonClicked(view: GameView) {
+        if let gameScene = view.scene as? MainGameScene,let data = gameScene.data {
+            let newScene = MainGameScene(size: gameScene.size, data: data)
+            view.presentScene(newScene)
+        }
+    }
+    
+    func gameViewNextButtonClicked(view: GameView) {
+        
+    }
     
     func gameFinish(sceneData: GameData, balls: Array<SKShapeNode>, barriers: Array<SKShapeNode>, drawNode: Array<SKSpriteNode>) {
-        guard let group = self.selectedGroup, let groupList = self.sceneGroupList, let index = group.sceneDatas.index(of: sceneData), let indexOfGroup = groupList.index(of: group) else {
+        guard let group = self.selectedGroup,
+            let groupList = self.sceneGroupList,
+            let index = group.sceneDatas.index(of: sceneData),
+            let indexOfGroup = groupList.index(of: group),
+            let gameView = self.gameView else {
             return
         }
         
@@ -451,7 +472,6 @@ extension GameMenuViewController: MainGameSceneDelegate {
         try! realm.write {
             sceneData.userConquer = true
         }
-        
         
         var nextSceneData: GameData?
         
@@ -466,6 +486,6 @@ extension GameMenuViewController: MainGameSceneDelegate {
             nextSceneData = group.sceneDatas[index + 1]
         }
         
+        gameView.showConquerView(next: nextSceneData)
     }
-    
 }
