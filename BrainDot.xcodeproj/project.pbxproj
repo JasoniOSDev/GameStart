@@ -25,6 +25,7 @@
 		D57DAAAA2011BC190020D198 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DAAA92011BC190020D198 /* GameData.swift */; };
 		D57EBB11203DAC3D00AB0F65 /* GameMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */; };
 		D57EBB16203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EBB15203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift */; };
+		D58CFEE52046A32B00481C2D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58CFEE42046A32B00481C2D /* GameView.swift */; };
 		D5A7ECC4203FFF1500D1FCA6 /* GameSecondMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7ECC3203FFF1400D1FCA6 /* GameSecondMenuCollectionViewCell.swift */; };
 		D5A7ECC620400A3300D1FCA6 /* GameMenuSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7ECC520400A3300D1FCA6 /* GameMenuSceneView.swift */; };
 		D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56534203BCE2E007FF406 /* BubbleView.swift */; };
@@ -56,6 +57,7 @@
 		D57DAAA92011BC190020D198 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		D57EBB10203DAC3D00AB0F65 /* GameMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuViewController.swift; sourceTree = "<group>"; };
 		D57EBB15203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFirstMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		D58CFEE42046A32B00481C2D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D5A7ECC3203FFF1400D1FCA6 /* GameSecondMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSecondMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5A7ECC520400A3300D1FCA6 /* GameMenuSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuSceneView.swift; sourceTree = "<group>"; };
 		D5D56534203BCE2E007FF406 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D57D61682045055800BB41E7 /* GameConquerView.swift */,
+				D58CFEE42046A32B00481C2D /* GameView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -223,7 +226,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "陈杰生";
 				TargetAttributes = {
 					D57DAA8B2011BBD60020D198 = {
@@ -331,6 +334,7 @@
 				D5A7ECC4203FFF1500D1FCA6 /* GameSecondMenuCollectionViewCell.swift in Sources */,
 				D5468148204143D7001B87D2 /* GameThirdMenuCollectionViewCell.swift in Sources */,
 				D546814C20416606001B87D2 /* GameSceneSnapShotView.swift in Sources */,
+				D58CFEE52046A32B00481C2D /* GameView.swift in Sources */,
 				D57DAA962011BBD60020D198 /* GameScene.swift in Sources */,
 				D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */,
 				D57DAAAA2011BC190020D198 /* GameData.swift in Sources */,
@@ -383,6 +387,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -390,6 +395,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -440,6 +446,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -447,6 +454,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
