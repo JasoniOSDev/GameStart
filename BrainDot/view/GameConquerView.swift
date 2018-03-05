@@ -17,6 +17,12 @@ class GameConquerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
+        self.layer.shadowColor = UIColor(colorHex: "9B9B9B").cgColor
+        self.layer.shadowOpacity = 1
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowRadius = 4
+        self.layer.cornerRadius = 3
         self.createComponent()
     }
     
@@ -26,11 +32,11 @@ class GameConquerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        var top = self.height * 0.1
-        let padding = self.height * 0.07
+        var top = self.height * 0.14
+        let padding = self.height * 0.1
         
         if self.nextButton.isHidden {
-            top = self.height * 0.17
+            top = self.height * 0.27
         }
         
         self.iconImageView.top = top
@@ -58,12 +64,14 @@ class GameConquerView: UIView {
         self.tipLabel = label
         
         let button = UIButton(type: .custom)
+        button.backgroundColor = UIColor.white
         button.setTitle("下一关", for: .normal)
+        button.setTitleColor(UIColor(colorHex: "6F6F6F"), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.frame.size = CGSize(width: 150, height: 30)
         button.layer.cornerRadius = 15
-        button.layer.shadowColor = UIColor(colorHex: "9B9B9B").cgColor
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2
+        button.layer.borderColor = UIColor(colorHex: "9B9B9B").cgColor
+        button.layer.borderWidth = 1
         button.addTarget(self, action: #selector(self.nextButtonClicked), for: .touchUpInside)
         self.addSubview(button)
         self.nextButton = button

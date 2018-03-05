@@ -22,6 +22,7 @@ class GameView: SKView {
     
     var backButton: UIButton!
     var retryButton: UIButton!
+    var conquerContainerView: UIView!
     weak var gameViewDelegate: GameViewDelegate?
 
     override init(frame: CGRect) {
@@ -72,13 +73,16 @@ class GameView: SKView {
     }
     
     func showConquerView(next sceneData: GameData?) {
+        let containerView = UIView(frame: self.bounds)
+        self.insertSubview(containerView, belowSubview: backButton)
+        containerView.backgroundColor = UIColor(colorHex: "D8D8D878")
         let conquerView = GameConquerView(frame: CGRect(x: 0, y: 0, width: 280, height: 190))
         conquerView.center = CGPoint(x: self.width / 2, y: self.height / 2)
-        self.backgroundColor = UIColor(colorHex: "D8D8D878")
-        self.addSubview(conquerView)
+        containerView.addSubview(conquerView)
         conquerView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         UIView.animate(withDuration: 0.25) {
             conquerView.transform = CGAffineTransform.identity
         }
+        self.conquerContainerView = containerView
     }
 }
