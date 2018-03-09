@@ -47,14 +47,32 @@ class MainGameScene: SKScene {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        for barrier in self.data.barriers {
+        self.updateComonent(with: self.data)
+    }
+    
+    func updateComonent(with data: GameData) {
+        self.staticBarriers.forEach { node in
+            node.removeFromParent()
+        }
+        self.staticBarriers.removeAll()
+        self.balls.forEach { node in
+            node.removeFromParent()
+        }
+        self.balls.removeAll()
+        self.drawDatas.removeAll()
+        self.drawBarriers.forEach { node in
+            node.removeFromParent()
+        }
+        self.drawBarriers.removeAll()
+        
+        for barrier in data.barriers {
             if let barrierNode = self.createNode(with: barrier) {
                 self.addChild(barrierNode)
                 self.staticBarriers.append(barrierNode)
             }
         }
         
-        for ball in self.data.balls {
+        for ball in data.balls {
             if let ballNode = self.createNode(with: ball) {
                 self.addChild(ballNode)
                 self.balls.append(ballNode)

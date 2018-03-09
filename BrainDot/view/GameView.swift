@@ -22,7 +22,8 @@ class GameView: SKView {
     
     var backButton: UIButton!
     var retryButton: UIButton!
-    var conquerContainerView: UIView!
+    var conquerContainerView: UIView?
+    var conquerView: GameConquerView?
     weak var gameViewDelegate: GameViewDelegate?
 
     override init(frame: CGRect) {
@@ -61,14 +62,28 @@ class GameView: SKView {
     }
     
     @objc func backButtonClicked() {
+        if (self.conquerContainerView != nil) {
+            self.conquerContainerView?.removeFromSuperview()
+            self.conquerContainerView = nil
+        }
         if let gameViewDelegate = self.gameViewDelegate {
             gameViewDelegate.gameViewBackButtonClicked(view: self)
         }
     }
     
     @objc func retryButtonClicked() {
+        if (self.conquerContainerView != nil) {
+            self.conquerContainerView?.removeFromSuperview()
+            self.conquerContainerView = nil
+        }
         if let gameViewDelegate = self.gameViewDelegate {
             gameViewDelegate.gameViewRetryButtonClicked(view: self)
+        }
+    }
+    
+    @objc func nextButtonClicked() {
+        if let gameViewDelegate = self.gameViewDelegate {
+            gameViewDelegate.gameViewNextButtonClicked(view: self)
         }
     }
     
@@ -77,12 +92,15 @@ class GameView: SKView {
         self.insertSubview(containerView, belowSubview: backButton)
         containerView.backgroundColor = UIColor(colorHex: "D8D8D878")
         let conquerView = GameConquerView(frame: CGRect(x: 0, y: 0, width: 280, height: 190))
+        conquerView.nextGameData = sceneData
+        conquerView.nextButton.addTarget(self, action: #selector(self.nextButtonClicked), for: .touchUpInside)
         conquerView.center = CGPoint(x: self.width / 2, y: self.height / 2)
         containerView.addSubview(conquerView)
         conquerView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         UIView.animate(withDuration: 0.25) {
             conquerView.transform = CGAffineTransform.identity
         }
+        self.conquerView = conquerView
         self.conquerContainerView = containerView
     }
 }
