@@ -49,6 +49,7 @@ class GameMenuSceneView: UIView {
         
         self.refreshLockContainerView()
         self.refreshIcons()
+        self.refreshIndexLabel()
     }
     
     private func refreshLockContainerView() {
@@ -88,8 +89,8 @@ class GameMenuSceneView: UIView {
         }
         self.indexLabel.text = "\(data.index)"
         self.indexLabel.sizeToFit()
-        self.indexLabel.left = 15
-        self.indexLabel.top = 12
+        self.indexLabel.left = self.width * 0.0468
+        self.indexLabel.top = self.height * 0.056
     }
     
     private func createComponent() {

@@ -45,9 +45,9 @@ class GameMenuViewController: UIViewController {
         let view = GameView(frame: self.view.bounds)
         view.gameViewDelegate = self
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.isHidden = true
         self.view.addSubview(view)
         view.backgroundColor = .clear
-        view.isHidden = true
         self.gameView = view
     }
     
@@ -451,12 +451,20 @@ extension GameMenuViewController: MainGameSceneDelegate,GameViewDelegate {
     func gameViewRetryButtonClicked(view: GameView) {
         if let gameScene = view.scene as? MainGameScene,let data = gameScene.data {
             let newScene = MainGameScene(size: gameScene.size, data: data)
+            newScene.gameDelegate = self
             view.presentScene(newScene)
         }
     }
     
     func gameViewNextButtonClicked(view: GameView) {
-        
+        if let gameScene = view.scene as? MainGameScene,
+            let conquerView = view.conquerView,
+            let nextData = conquerView.nextGameData {
+            
+            view.conquerContainerView?.removeFromSuperview()
+            gameScene.updateComonent(with: nextData)
+            gameScene.isPaused = false
+        }
     }
     
     func gameFinish(sceneData: GameData, balls: Array<SKShapeNode>, barriers: Array<SKShapeNode>, drawNode: Array<SKSpriteNode>) {
@@ -485,7 +493,7 @@ extension GameMenuViewController: MainGameSceneDelegate,GameViewDelegate {
         } else {
             nextSceneData = group.sceneDatas[index + 1]
         }
-        
+        nextSceneData?.lock = false
         gameView.showConquerView(next: nextSceneData)
     }
 }

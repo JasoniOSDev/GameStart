@@ -151,12 +151,7 @@ class GameViewController: UIViewController {
             })
         }) { _ in
             let menuViewController = GameMenuViewController()
-            self.present(menuViewController, animated: false, completion: nil)
-            
-            for view in self.view.subviews {
-                view.isHidden = true
-            }
-            self.view.backgroundColor = .clear
+            self.present(menuViewController, animated: false, completion: nil)            
         }
     }
     

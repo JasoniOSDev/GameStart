@@ -162,7 +162,7 @@ class BallObject: GameSceneObject {
 }
 
 class UserDrawObject: Object {
-    @objc dynamic var image: UIImage?
+    @objc dynamic var imageData: NSData?
     @objc dynamic var positionXOffset = 0.0
     @objc dynamic var positionYOffset = 0.0
 }
