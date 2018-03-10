@@ -32,6 +32,10 @@
 		D5D5653C203BE986007FF406 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5D5653B203BE986007FF406 /* CoreGraphics.framework */; };
 		D5D56541203D38EF007FF406 /* BrainDotExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56540203D38EF007FF406 /* BrainDotExtension.swift */; };
 		D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */; };
+		D5D91CBA2052CDD500233106 /* GameDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CB92052CDD500233106 /* GameDataManager.swift */; };
+		D5D91CBE2053C46900233106 /* CustomGameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CBD2053C46900233106 /* CustomGameSceneViewController.swift */; };
+		D5D91CC02053C4F700233106 /* BackupComponentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CBF2053C4F700233106 /* BackupComponentContainerView.swift */; };
+		D5D91CC52053C81100233106 /* GameSceneVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CC42053C81100233106 /* GameSceneVIew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,10 @@
 		D5D5653B203BE986007FF406 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D5D56540203D38EF007FF406 /* BrainDotExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainDotExtension.swift; sourceTree = "<group>"; };
 		D5D56542203D3A6D007FF406 /* BrainDotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainDotHelper.swift; sourceTree = "<group>"; };
+		D5D91CB92052CDD500233106 /* GameDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataManager.swift; sourceTree = "<group>"; };
+		D5D91CBD2053C46900233106 /* CustomGameSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameSceneViewController.swift; sourceTree = "<group>"; };
+		D5D91CBF2053C4F700233106 /* BackupComponentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupComponentContainerView.swift; sourceTree = "<group>"; };
+		D5D91CC42053C81100233106 /* GameSceneVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneVIew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,7 @@
 		D57DAA8E2011BBD60020D198 /* BrainDot */ = {
 			isa = PBXGroup;
 			children = (
+				D5D91CC12053C52500233106 /* Custom */,
 				D57D61672045052900BB41E7 /* view */,
 				D50241592042EA00009BBD47 /* Game */,
 				D57EBB12203DC62900AB0F65 /* Menu */,
@@ -183,6 +192,7 @@
 		D5A7ECC7204028EC00D1FCA6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D5D91CB92052CDD500233106 /* GameDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +204,16 @@
 				2459015FF5B1A42C519F6ED3 /* Pods_BrainDot.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5D91CC12053C52500233106 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				D5D91CBD2053C46900233106 /* CustomGameSceneViewController.swift */,
+				D5D91CBF2053C4F700233106 /* BackupComponentContainerView.swift */,
+				D5D91CC42053C81100233106 /* GameSceneVIew.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D91CBA2052CDD500233106 /* GameDataManager.swift in Sources */,
 				D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */,
 				D5A7ECC4203FFF1500D1FCA6 /* GameSecondMenuCollectionViewCell.swift in Sources */,
 				D5468148204143D7001B87D2 /* GameThirdMenuCollectionViewCell.swift in Sources */,
@@ -337,17 +358,20 @@
 				D58CFEE52046A32B00481C2D /* GameView.swift in Sources */,
 				D57DAA962011BBD60020D198 /* GameScene.swift in Sources */,
 				D5D56543203D3A6D007FF406 /* BrainDotHelper.swift in Sources */,
+				D5D91CBE2053C46900233106 /* CustomGameSceneViewController.swift in Sources */,
 				D57DAAAA2011BC190020D198 /* GameData.swift in Sources */,
 				D57EBB11203DAC3D00AB0F65 /* GameMenuViewController.swift in Sources */,
 				D5A7ECC620400A3300D1FCA6 /* GameMenuSceneView.swift in Sources */,
 				D57D61692045055800BB41E7 /* GameConquerView.swift in Sources */,
 				D57DAA982011BBD60020D198 /* GameViewController.swift in Sources */,
 				D546814E20416B1C001B87D2 /* GameSceneSnapshotLayer.swift in Sources */,
+				D5D91CC02053C4F700233106 /* BackupComponentContainerView.swift in Sources */,
 				D57EBB16203DC65D00AB0F65 /* GameFirstMenuCollectionViewCell.swift in Sources */,
 				D5D56541203D38EF007FF406 /* BrainDotExtension.swift in Sources */,
 				D57DAA902011BBD60020D198 /* AppDelegate.swift in Sources */,
 				D57D616620440C4B00BB41E7 /* MainGameSceneDelegate.swift in Sources */,
 				D57DAAA82011BBEF0020D198 /* MainGameScene.swift in Sources */,
+				D5D91CC52053C81100233106 /* GameSceneVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

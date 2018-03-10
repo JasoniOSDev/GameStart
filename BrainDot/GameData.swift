@@ -148,6 +148,11 @@ class GameSceneObject: Object {
     func objectClass() -> GameSceneObjectClass {
         return .barrier
     }
+    
+    func fullSize() {
+        self.sizeWidth = 1
+        self.sizeHeight = 1
+    }
 }
 
 class BarrierObject: GameSceneObject {
