@@ -2,8 +2,8 @@
 //  MainGameSceneDelegate.swift
 //  BrainDot
 //
-//  Created by chenjiesheng on 2018/2/26.
-//  Copyright © 2018年 陈杰生. All rights reserved.
+//  Created by Jane Ren on 2018/2/26.
+//  Copyright © 2018年 Jane Ren. All rights reserved.
 //
 
 import SpriteKit
