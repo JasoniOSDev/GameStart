@@ -15,8 +15,10 @@ class GameMenuViewController: UIViewController {
     var firstMenuCollectionView: UICollectionView!
     var secondMenuCollectionView: UICollectionView!
     var thirdMenuCollectionView: UICollectionView!
+    var addSceneButton: UIButton!
     var titleLabel: UILabel!
     var menus: Array<GameMenu>!
+    var selectedMenu: GameMenu?
     
     var sceneGroupList: Array<SceneDataGroup>?
     var selectedMenuCell: UIView?
@@ -39,6 +41,19 @@ class GameMenuViewController: UIViewController {
         self.createThirdMenuCollectionView()
         self.createTitleLabel()
         self.createGameView()
+        self.createAddSceneButton()
+    }
+    
+    func createAddSceneButton() {
+        self.addSceneButton = UIButton(type: .custom)
+        self.addSceneButton.setTitle("新增", for: .normal)
+        self.addSceneButton.setTitleColor(.black, for: .normal)
+        self.addSceneButton.sizeToFit()
+        self.addSceneButton.center.y = self.titleLabel.center.y
+        self.addSceneButton.right = self.view.right - 25
+        self.view.addSubview(self.addSceneButton)
+        self.addSceneButton.addTarget(self, action: #selector(self.addSceneButtonClicked(btn:)), for: .touchUpInside)
+        self.addSceneButton.isHidden = true
     }
     
     func createGameView() {
@@ -60,25 +75,18 @@ class GameMenuViewController: UIViewController {
             let sceneData = GameData()
             let barrier = BarrierObject()
             barrier.barrierType = BarrierType.rectangle.rawValue
-            barrier.sizeHeight = 0.25
-            barrier.sizeWidth = 0.25
-            barrier.positionXOffset = 0.375
-            barrier.positionYOffset = 0.375
+            barrier.setPercentSize(width: 0.25, height: 0.23)
+            barrier.setPercentPosition(x: 0.375, y: 0.375)
             sceneData.barriers.append(barrier)
             
             let ball = BallObject()
-            ball.sizeWidth = 0.1
-            ball.sizeHeight = 0.1
-            ball.positionXOffset = 0
-            ball.positionYOffset = 0
+            ball.setPercentSize(width: 0.1, height: 0.1)
             ball.colorHex = "4A90E2"
             sceneData.balls.append(ball)
             
             let ball2 = BallObject()
-            ball2.sizeWidth = 0.1
-            ball2.sizeHeight = 0.1
-            ball2.positionXOffset = 0.2
-            ball2.positionYOffset = 0.2
+            ball2.setPercentSize(width: 0.1, height: 0.1)
+            ball2.setPercentPosition(x: 0.2, y: 0.2)
             ball2.colorHex = "4A90E2"
             sceneData.balls.append(ball2)
             
@@ -287,6 +295,7 @@ extension GameMenuViewController
         guard self.secondMenuCollectionView.isHidden == false,self.thirdMenuCollectionView.isHidden == true else {
             self.thirdMenuCollectionView.isHidden = true
             self.secondMenuCollectionView.isHidden = false
+            self.addSceneButton.isHidden = true
             return
         }
         selectedCell.isUserInteractionEnabled = false
@@ -342,6 +351,8 @@ extension GameMenuViewController
             return
         }
         let menu = self.menus[indexPath.row]
+        self.selectedMenu = menu
+        self.addSceneButton.isHidden = !(self.selectedMenu?.menuID == 2)
         selectCellSnapshot.frame = cell.imageView.convert(cell.imageView.bounds, to: self.view)
         self.selectedOriginPosition = selectCellSnapshot.center
         self.selectedMenuCell = selectCellSnapshot
@@ -442,6 +453,11 @@ extension GameMenuViewController
 }
 
 extension GameMenuViewController: MainGameSceneDelegate,GameViewDelegate {
+    
+    @objc func addSceneButtonClicked(btn: UIButton) {
+        let customSceneVC = CustomGameSceneViewController()
+        self.present(customSceneVC, animated: true, completion: nil)
+    }
     
     func gameViewBackButtonClicked(view: GameView) {
         view.presentScene(nil)

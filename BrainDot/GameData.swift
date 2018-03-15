@@ -139,11 +139,21 @@ enum GameSceneObjectClass: Int {
 }
 
 class GameSceneObject: Object {
-    @objc dynamic var sizeWidth: CGFloat = 0.0
-    @objc dynamic var sizeHeight: CGFloat = 0.0
+    @objc dynamic var sizeWidth: CGFloat = 0.06
+    @objc dynamic var sizeHeight: CGFloat = 0.06
     @objc dynamic var positionXOffset: CGFloat = 0.0
     @objc dynamic var positionYOffset: CGFloat = 0.0
     @objc dynamic var colorHex = "000000"
+    
+    override func copy() -> Any {
+        let object = GameSceneObject()
+        object.sizeWidth = self.sizeWidth
+        object.sizeHeight = self.sizeHeight
+        object.positionXOffset = self.positionXOffset
+        object.positionYOffset = self.positionYOffset
+        object.colorHex = self.colorHex
+        return object
+    }
     
     func objectClass() -> GameSceneObjectClass {
         return .barrier
@@ -153,16 +163,84 @@ class GameSceneObject: Object {
         self.sizeWidth = 1
         self.sizeHeight = 1
     }
+    
+    func setSize(newSize: CGSize) {
+        let screenSize = UIScreen.main.bounds.size
+        self.sizeWidth = newSize.width / screenSize.width
+        self.sizeHeight = newSize.height / screenSize.height
+    }
+    
+    func setPercentSize(width: CGFloat, height: CGFloat) {
+        self.sizeWidth = width
+        self.sizeHeight = height
+    }
+    
+    func setPercentSize(newPercentSize: CGSize) {
+        self.sizeWidth = newPercentSize.width
+        self.sizeHeight = newPercentSize.height
+    }
+    
+    func setPercentPosition(newPercenterPosition: CGPoint) {
+        self.positionXOffset = newPercenterPosition.x
+        self.positionYOffset = newPercenterPosition.y
+    }
+    
+    func setPercentPosition(x: CGFloat, y: CGFloat) {
+        self.positionXOffset = x
+        self.positionYOffset = y
+    }
+    
+    func updatePosition(newPoint: CGPoint) {
+        let screenCenter = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+        let screenSize = UIScreen.main.bounds.size
+        self.positionXOffset = (newPoint.x - screenCenter.x) / screenSize.width
+        self.positionYOffset = (newPoint.y - screenCenter.y) / screenSize.height
+    }
+    
+    func position(rect: CGRect) -> CGPoint {
+        let size = rect.size
+        var position = CGPoint(x: size.width / 2, y: size.height / 2)
+        position.x += size.width * self.positionXOffset;
+        position.y += size.height * self.positionYOffset;
+        return position;
+    }
+    
+    func updatePositionWith(diff point: CGPoint) {
+        var originPosition = self.position(rect: UIScreen.main.bounds)
+        originPosition.x += point.x
+        originPosition.y += point.y
+        self.updatePosition(newPoint: originPosition)
+    }
 }
 
 class BarrierObject: GameSceneObject {
     @objc dynamic var barrierType = 0
+    override func copy() -> Any {
+        let object = BarrierObject()
+        object.sizeWidth = self.sizeWidth
+        object.sizeHeight = self.sizeHeight
+        object.positionXOffset = self.positionXOffset
+        object.positionYOffset = self.positionYOffset
+        object.colorHex = self.colorHex
+        object.barrierType = self.barrierType
+        return object
+    }
 }
 
 class BallObject: GameSceneObject {
     
     override func objectClass() -> GameSceneObjectClass {
         return .ball
+    }
+    
+    override func copy() -> Any {
+        let object = BallObject()
+        object.sizeWidth = self.sizeWidth
+        object.sizeHeight = self.sizeHeight
+        object.positionXOffset = self.positionXOffset
+        object.positionYOffset = self.positionYOffset
+        object.colorHex = self.colorHex
+        return object
     }
 }
 

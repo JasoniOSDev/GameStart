@@ -11,7 +11,19 @@ import UIKit
 class GameSceneLayer: CAShapeLayer {
     
     var sceneObject: GameSceneObject!
-    
+    var selected: Bool = false {
+        didSet {
+            self.setNeedsLayout()
+        }
+    }
+    var move: Bool = false {
+        didSet{
+            if oldValue != self.move {
+                self.setNeedsLayout()
+            }
+        }
+    }
+    var selectedShapeLayer: CAShapeLayer?
     init(with object: GameSceneObject) {
         super.init()
         self.sceneObject = object
@@ -21,16 +33,19 @@ class GameSceneLayer: CAShapeLayer {
         super.init(coder: aDecoder)
     }
     
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
     class func layer(with object: GameSceneObject) -> GameSceneLayer{
         switch object.objectClass() {
         case .barrier:
             return GameSceneBarrierShapeLayer(with: object)
         case .ball:
             return GameSceneBallLayer(with: object)
-        default:
-            return GameSceneLayer(with: object)
         }
     }
+    
 }
 
 class GameSceneBallLayer: GameSceneLayer {
@@ -42,6 +57,10 @@ class GameSceneBallLayer: GameSceneLayer {
         if let ball = object as? BallObject {
             self.ball = ball
         }
+    }
+    
+    override init(layer: Any) {
+        super.init(layer: layer)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,17 +79,40 @@ class GameSceneBallLayer: GameSceneLayer {
         self.path = path.cgPath
         self.fillColor = UIColor(colorHex: ball.colorHex).cgColor
         self.strokeColor = nil
+        if self.selected {
+            if self.selectedShapeLayer != nil {
+                self.selectedShapeLayer?.lineWidth = self.move ? 6 : 4
+                return
+            }
+            let layer = CAShapeLayer()
+            layer.path = self.path
+            layer.fillColor = nil
+            layer.strokeColor = UIColor(colorHex: "82B2EA").cgColor
+            layer.lineWidth = self.move ? 6 : 4
+            self.selectedShapeLayer = layer
+            self.addSublayer(layer)
+        } else {
+            if let shapeLayer = self.selectedShapeLayer {
+                shapeLayer.removeFromSuperlayer()
+                self.selectedShapeLayer = nil
+            }
+        }
     }
 }
 
 class GameSceneBarrierShapeLayer: GameSceneLayer {
     
     var barrier: BarrierObject?
+    
     override init(with object: GameSceneObject) {
         super.init(with: object)
         if let barrier = object as? BarrierObject {
             self.barrier = barrier
         }
+    }
+    
+    override init(layer: Any) {
+        super.init(layer: layer)
     }
     
     override func layoutSublayers() {
@@ -92,7 +134,7 @@ class GameSceneBarrierShapeLayer: GameSceneLayer {
             let path = UIBezierPath()
             path.move(to: CGPoint(x: (self.bounds.width - size) / 2, y: self.bounds.height))
             path.addLine(to: CGPoint(x: (self.bounds.width + size) / 2, y: self.bounds.height))
-            path.addLine(to: CGPoint(x: self.bounds.width / 2, y: (1 - sqrt(3)) / 2 * self.bounds.height))
+            path.addLine(to: CGPoint(x: self.bounds.width / 2, y:  self.bounds.height - sqrt(3) / 2 * size))
             path.addLine(to: CGPoint(x: (self.bounds.width - size) / 2, y: self.bounds.height))
             path.close()
             self.path = path.cgPath
@@ -100,6 +142,25 @@ class GameSceneBarrierShapeLayer: GameSceneLayer {
             self.path = nil
         }
         self.fillColor = UIColor(colorHex: barrier.colorHex).cgColor
+        
+        if self.selected {
+            if self.selectedShapeLayer != nil {
+                self.selectedShapeLayer?.lineWidth = self.move ? 6 : 4
+                return
+            }
+            let layer = CAShapeLayer()
+            layer.path = self.path
+            layer.fillColor = nil
+            layer.strokeColor = UIColor(colorHex: "82B2EA").cgColor
+            layer.lineWidth = self.move ? 6 : 4
+            self.selectedShapeLayer = layer
+            self.addSublayer(layer)
+        } else {
+            if let shapeLayer = self.selectedShapeLayer {
+                shapeLayer.removeFromSuperlayer()
+                self.selectedShapeLayer = nil
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

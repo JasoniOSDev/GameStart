@@ -38,7 +38,6 @@ class GameSceneSnapShotView: UIView {
         
         layer.position = CGPoint(x: positionX, y: positionY)
         layer.bounds = CGRect(x: 0, y: 0, width: layerWidth, height: layerHeight)
-        
     }
     
     func setupContentWithSceneData(sceneData: GameData) {

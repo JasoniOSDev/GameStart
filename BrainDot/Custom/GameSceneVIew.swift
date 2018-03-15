@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameSceneView: UIView {
+class GameSceneView: UIButton {
 
     var sceneLayer: GameSceneLayer?
     var sceneData: GameSceneObject!
@@ -31,7 +31,8 @@ class GameSceneView: UIView {
         guard let layer = self.sceneLayer else {
             return
         }
-        layer.frame = self.bounds
+        layer.bounds = CGRect(x: 0, y: 0, width: self.width * layer.sceneObject.sizeWidth, height: self.height * layer.sceneObject.sizeHeight)
+        layer.position = CGPoint(x: self.width / 2, y: self.height / 2)
         layer.setNeedsLayout()
     }
     
@@ -46,4 +47,5 @@ class GameSceneView: UIView {
         self.sceneLayer = layer
         self.setNeedsLayout()
     }
+    
 }

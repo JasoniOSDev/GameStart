@@ -21,11 +21,12 @@ class BackupComponentContainerView: UIView {
     
     init(sceneObjects: Array<GameSceneObject>) {
         super.init(frame: CGRect.zero)
+        self.backgroundColor = UIColor(colorHex: "3B3B3B")
         self.scrollView = UIScrollView(frame: self.bounds)
         self.scrollView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.showsHorizontalScrollIndicator = false
-        
+        self.addSubview(self.scrollView)
         self.refreshDatas(with: sceneObjects)
     }
     
@@ -59,6 +60,7 @@ class BackupComponentContainerView: UIView {
         if dis > 0 {
             for _ in 0 ..< dis {
                 let view = GameSceneView()
+                view.addTarget(self, action: #selector(self.buttonClicked(btn:)), for: .touchUpInside)
                 self.scrollView.addSubview(view)
                 self.sceneViews.append(view)
             }
@@ -72,19 +74,9 @@ class BackupComponentContainerView: UIView {
         self.setNeedsLayout()
     }
     
-    @objc func tapGestureAction(gesture: UITapGestureRecognizer) {
-        let location = gesture.location(in: self)
-        var selectedView: GameSceneView? = nil
-        self.sceneViews.forEach { view in
-            if view.frame.contains(location) {
-                selectedView = view
-            }
-        }
-        if let result = selectedView {
-            
-            if let data = result.sceneData,let delegate = self.delegate {
-                delegate.backupComonponentSelected(sceneData: data.copy() as! GameSceneObject)
-            }
+    @objc func buttonClicked(btn: GameSceneView) {
+        if let delegate = self.delegate,let data = btn.sceneData {
+            delegate.backupComonponentSelected(sceneData: data.copy() as! GameSceneObject)
         }
     }
 }
