@@ -283,7 +283,11 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
                     if !self.view.bounds.intersects(layer.frame) {
                         self.showButtons()
                         self.removeLayerWith(layer: layer)
-                    }
+                        let generator = UIImpactFeedbackGenerator(style: .light)
+                        generator.prepare()
+                        generator.impactOccurred()
+                        
+                }
                 default:
                     break
             }
