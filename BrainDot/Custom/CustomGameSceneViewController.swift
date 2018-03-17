@@ -302,6 +302,9 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
         guard let layer = self.selectedLayer else {
             return
         }
+        if layer == self.redBallLayer || layer == self.blueBallLayer {
+            return
+        }
         let diff: CGFloat = (gesture.scale - 1) * 0.8
         let scale: CGFloat = diff + 1
         CATransaction.begin()
