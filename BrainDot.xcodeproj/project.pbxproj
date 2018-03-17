@@ -36,6 +36,7 @@
 		D5D91CBE2053C46900233106 /* CustomGameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CBD2053C46900233106 /* CustomGameSceneViewController.swift */; };
 		D5D91CC02053C4F700233106 /* BackupComponentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CBF2053C4F700233106 /* BackupComponentContainerView.swift */; };
 		D5D91CC52053C81100233106 /* GameSceneVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D91CC42053C81100233106 /* GameSceneVIew.swift */; };
+		D5FE0157205D62100005EE35 /* MainGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FE0156205D62100005EE35 /* MainGameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		D5D91CBD2053C46900233106 /* CustomGameSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameSceneViewController.swift; sourceTree = "<group>"; };
 		D5D91CBF2053C4F700233106 /* BackupComponentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupComponentContainerView.swift; sourceTree = "<group>"; };
 		D5D91CC42053C81100233106 /* GameSceneVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneVIew.swift; sourceTree = "<group>"; };
+		D5FE0156205D62100005EE35 /* MainGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				D57D61682045055800BB41E7 /* GameConquerView.swift */,
 				D58CFEE42046A32B00481C2D /* GameView.swift */,
+				D5FE0156205D62100005EE35 /* MainGameViewController.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5D91CBA2052CDD500233106 /* GameDataManager.swift in Sources */,
+				D5FE0157205D62100005EE35 /* MainGameViewController.swift in Sources */,
 				D5D56535203BCE2E007FF406 /* BubbleView.swift in Sources */,
 				D5A7ECC4203FFF1500D1FCA6 /* GameSecondMenuCollectionViewCell.swift in Sources */,
 				D5468148204143D7001B87D2 /* GameThirdMenuCollectionViewCell.swift in Sources */,
@@ -514,13 +518,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XY62SV3XGC;
+				DEVELOPMENT_TEAM = 6QU98983F9;
 				INFOPLIST_FILE = BrainDot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.sr.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BrainDot/BrainDot-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -534,13 +540,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XY62SV3XGC;
+				DEVELOPMENT_TEAM = 6QU98983F9;
 				INFOPLIST_FILE = BrainDot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.sr.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BrainDot/BrainDot-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

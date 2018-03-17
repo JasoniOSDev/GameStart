@@ -195,16 +195,13 @@ extension MainGameScene {
                     positionX = centerX - nodeWidth / 2
                     positionY = centerY - nodeHeight / 2
                     let tmpPath = UIBezierPath()
-                    var x = -nodeWidth / 2 + positionX
-                    var y = nodeHeight / 2 + positionY
+                    var x = positionX
+                    var y = positionY
                     tmpPath.move(to: CGPoint(x: x, y: y))
                     x += nodeWidth
                     tmpPath.addLine(to: CGPoint(x: x, y: y))
                     x = centerX
-                    y = y - sqrt(3) / 2 * nodeWidth
-                    tmpPath.addLine(to: CGPoint(x: x, y: y))
-                    x = -nodeWidth / 2 + positionX
-                    y = nodeHeight / 2 + positionY
+                    y = y + sqrt(3) / 2 * nodeWidth
                     tmpPath.addLine(to: CGPoint(x: x, y: y))
                     tmpPath.close()
                     path = tmpPath.cgPath

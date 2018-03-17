@@ -257,8 +257,8 @@ class SceneDataGroup: Object {
 }
 
 class GameData: Object {
-    let balls = List<BallObject>()
-    let barriers = List<BarrierObject>()
+    var balls = List<BallObject>()
+    var barriers = List<BarrierObject>()
     @objc dynamic var userCustom = false //是否是用户自定义
     @objc dynamic var userFavorite = false //用户是否收藏
     @objc dynamic var userConquer = false //是否已经通过

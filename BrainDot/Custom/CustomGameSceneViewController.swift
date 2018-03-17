@@ -7,20 +7,23 @@
 //
 
 import UIKit
-
+import SpriteKit
+import RealmSwift
 class CustomGameSceneViewController: UIViewController {
 
     var componentView: BackupComponentContainerView!
     var showComponentButton: UIButton!
     var showComponentView: Bool = false
-    var allButtonIsShow: Bool = false
+    var allButtonIsShow: Bool = true
     var userIsTouch: Bool = false
     var finishButton: UIButton!
     var backButton: UIButton!
     var resetButton: UIButton!
+    var testButton: UIButton!
     var blueBallLayer: GameSceneLayer!
     var redBallLayer: GameSceneLayer!
     var selectedLayer: GameSceneLayer?
+    var layerContainerView: UIView!
     var selectedLayerPosition: CGPoint = CGPoint.zero
     var touchOriginPoint: CGPoint = CGPoint.zero
     var gameSceneLayers: Array<GameSceneLayer> = Array()
@@ -34,6 +37,13 @@ class CustomGameSceneViewController: UIViewController {
     }
     
     func createComponent() {
+        
+        self.layerContainerView = UIView(frame: self.view.bounds)
+        self.layerContainerView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        self.layerContainerView.backgroundColor = .clear
+        self.layerContainerView.isUserInteractionEnabled = false
+        self.view.addSubview(self.layerContainerView)
+        
         self.createShowComponentButton()
         self.createComponentView()
         self.createBackAndResetButton()
@@ -60,8 +70,8 @@ class CustomGameSceneViewController: UIViewController {
         red.setPercentPosition(x: 0.25, y: -0.18)
         let redLayer = GameSceneLayer.layer(with: red)
         let blueLayer = GameSceneLayer.layer(with: blue)
-        self.view.layer.addSublayer(redLayer)
-        self.view.layer.addSublayer(blueLayer)
+        self.layerContainerView.layer.addSublayer(redLayer)
+        self.layerContainerView.layer.addSublayer(blueLayer)
         self.refreshFrame(with: redLayer, data: red)
         self.refreshFrame(with: blueLayer, data: blue)
         self.redBallLayer = redLayer
@@ -104,6 +114,16 @@ class CustomGameSceneViewController: UIViewController {
     }
     
     func createFinishButton() {
+        
+        self.testButton = UIButton(type: .custom)
+        self.testButton.setTitle("预览", for: .normal)
+        self.testButton.setTitleColor(.black, for: .normal)
+        self.testButton.sizeToFit()
+        self.testButton.addTarget(self, action: #selector(self.testButtonClicked), for: .touchUpInside)
+        self.testButton.center.x = self.view.width / 2
+        self.testButton.center.y = self.showComponentButton.center.y + 20
+        self.view.addSubview(self.testButton)
+        
         self.finishButton = UIButton(type: .custom)
         self.finishButton.setImage(UIImage(named: "finish"), for: .normal)
         self.finishButton.sizeToFit()
@@ -158,6 +178,8 @@ class CustomGameSceneViewController: UIViewController {
             btn.alpha = 0
             self.finishButton.transform = CGAffineTransform(translationX: 0, y: 20)
             self.finishButton.alpha = 0
+            self.testButton.transform = CGAffineTransform(translationX: 0, y: 20)
+            self.testButton.alpha = 0
             self.componentView.alpha = 1
             self.componentView.transform = CGAffineTransform(translationX: 0, y: -self.componentView.height)
         }) { _ in
@@ -170,11 +192,55 @@ class CustomGameSceneViewController: UIViewController {
     }
     
     @objc func resetButtonClicked() {
-        
+        while self.gameSceneLayers.count > 0 {
+            if let layer = self.gameSceneLayers.first {
+                self.removeLayerWith(layer: layer)
+            }
+            self.gameSceneLayers.removeFirst()
+        }
+        self.redBallLayer.removeFromSuperlayer()
+        self.blueBallLayer.removeFromSuperlayer()
+        self.createBalls()
     }
     
     @objc func finishButtonClicked() {
+        let realm = try! Realm()
+        let lastData = realm.objects(GameData.self).filter("userCustom == 1").sorted(byKeyPath: "index", ascending: true).last
         
+        let gameData = GameData()
+        let ballList = List<BallObject>()
+        let barrierList = List<BarrierObject>()
+        ballList.append(blueBallLayer.sceneObject as! BallObject)
+        ballList.append(redBallLayer.sceneObject as! BallObject)
+        barrierList.append(objectsIn: self.barrierObject)
+        gameData.balls = ballList
+        gameData.barriers = barrierList
+        gameData.userCustom = true
+        gameData.lock = false
+        gameData.index = (lastData?.index ?? 0) + 1
+        try! realm.write {
+            realm.add(gameData)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func testButtonClicked() {
+        let gameData = GameData()
+        let ballList = List<BallObject>()
+        let barrierList = List<BarrierObject>()
+        ballList.append(blueBallLayer.sceneObject as! BallObject)
+        ballList.append(redBallLayer.sceneObject as! BallObject)
+        barrierList.append(objectsIn: self.barrierObject)
+        gameData.balls = ballList
+        gameData.barriers = barrierList
+        gameData.userCustom = true
+        gameData.lock = false
+        self.showGameScene(gameData: gameData)
+    }
+    
+    func showGameScene(gameData: GameData) {
+        let gameVC = MainGameViewController(gameData: gameData)
+        self.present(gameVC, animated: true, completion: nil)
     }
 }
 
@@ -183,7 +249,6 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.hideComponentView()
-        self.userIsTouch = true
         if let touch = touches.first{
             let location = touch.location(in: self.view)
             for layer in self.gameSceneLayers {
@@ -214,8 +279,9 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
                     self.refreshFrame(with: layer, data: layer.sceneObject)
                 case .cancelled,.ended:
                     layer.move = false
-                    self.perform(#selector(self.showButtons), with: nil, afterDelay: 2)
+                    self.perform(#selector(self.showButtons), with: nil, afterDelay: 1)
                     if !self.view.bounds.intersects(layer.frame) {
+                        self.showButtons()
                         self.removeLayerWith(layer: layer)
                     }
                 default:
@@ -228,7 +294,6 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        self.userIsTouch = false
         self.selectedLayerPosition = CGPoint.zero
         self.touchOriginPoint = CGPoint.zero
     }
@@ -254,7 +319,7 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
         case .cancelled,
              .ended:
             self.userIsTouch = false
-            self.perform(#selector(self.showButtons), with: nil, afterDelay: 2)
+            self.perform(#selector(self.showButtons), with: nil, afterDelay: 1)
             var width = layer.sceneObject.sizeWidth
             var height = layer.sceneObject.sizeHeight
             width *= scale
@@ -281,7 +346,7 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
         self.gameSceneLayers.append(layer)
         self.barrierObject.append(sceneData as! BarrierObject)
         self.refreshFrame(with: layer, data: sceneData)
-        self.view.layer.addSublayer(layer)
+        self.layerContainerView.layer.addSublayer(layer)
         layer.layoutSublayers()
         self.selectedLayer?.selected = false
         self.selectedLayer = layer
@@ -311,14 +376,8 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
             self.showComponentButton.alpha = 1
             self.finishButton.transform = CGAffineTransform.identity
             self.finishButton.alpha = 1
-            self.componentView.alpha = 0
-            self.componentView.transform = CGAffineTransform.identity
-        })
-        UIView.animate(withDuration: 0.3, animations: {
-            self.showComponentButton.transform = CGAffineTransform.identity
-            self.showComponentButton.alpha = 1
-            self.finishButton.transform = CGAffineTransform.identity
-            self.finishButton.alpha = 1
+            self.testButton.transform = CGAffineTransform.identity
+            self.testButton.alpha = 1
             self.componentView.alpha = 0
             self.componentView.transform = CGAffineTransform.identity
         }) { _ in
@@ -338,6 +397,8 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
             self.finishButton.alpha = 0
             self.showComponentButton.transform = CGAffineTransform(translationX: 0, y: 20)
             self.showComponentButton.alpha = 0
+            self.testButton.transform = CGAffineTransform(translationX: 0, y: 20)
+            self.testButton.alpha = 0
             self.resetButton.transform = CGAffineTransform(translationX: self.view.width - self.resetButton.right, y: 0)
             self.resetButton.alpha = 0
             self.backButton.transform = CGAffineTransform(translationX: -self.backButton.left, y: 0)
@@ -356,6 +417,8 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
             self.finishButton.alpha = 1
             self.showComponentButton.transform = CGAffineTransform.identity
             self.showComponentButton.alpha = 1
+            self.testButton.transform = .identity
+            self.testButton.alpha = 1
             self.resetButton.transform = CGAffineTransform.identity
             self.resetButton.alpha = 1
             self.backButton.transform = CGAffineTransform.identity

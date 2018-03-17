@@ -28,4 +28,5 @@ class GameDataManager: NSObject {
     func createSceneGroup() -> Array<SceneDataGroup> {
         return Array()
     }
+    
 }

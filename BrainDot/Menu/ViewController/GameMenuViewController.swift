@@ -27,10 +27,17 @@ class GameMenuViewController: UIViewController {
     var selectedGroup: SceneDataGroup?
     
     var gameView: GameView?
+    var customGameData: Results<GameData>!
+    var customDataNotificationToken:NotificationToken!
+    
+    deinit {
+        self.customDataNotificationToken.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.loadCustomData()
         self.createComponent()
     }
     
@@ -42,6 +49,24 @@ class GameMenuViewController: UIViewController {
         self.createTitleLabel()
         self.createGameView()
         self.createAddSceneButton()
+    }
+    
+    func loadCustomData() {
+        let realm = try! Realm()
+        let customResult = realm.objects(GameData.self).filter("userCustom == 1")
+        self.customGameData = customResult
+        self.customDataNotificationToken = customResult.observe { [weak self]
+            change in
+            guard let strongSelf = self, strongSelf.selectedMenu?.menuID == 2 else {
+                return
+            }
+            switch change {
+            case .update(_, deletions: _, insertions: _, modifications: _):
+                strongSelf.thirdMenuCollectionView.reloadData()
+            default:
+                break
+            }
+        }
     }
     
     func createAddSceneButton() {
@@ -292,6 +317,23 @@ extension GameMenuViewController
         guard let selectedCell = self.selectedMenuCell else {
             return
         }
+        
+        if let menu = self.selectedMenu,menu.menuID == 2 {
+            self.addSceneButton.isHidden = true
+            selectedCell.isUserInteractionEnabled = false
+            self.thirdMenuCollectionView.isHidden = true
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
+                selectedCell.transform = CGAffineTransform.identity
+                selectedCell.center = self.selectedOriginPosition
+            }) { _ in
+                self.firstMenuCollectionView.isHidden = false
+                selectedCell.removeFromSuperview()
+                self.selectedMenuCell = nil
+                self.sceneGroupList = nil
+            }
+            return
+        }
+        
         guard self.secondMenuCollectionView.isHidden == false,self.thirdMenuCollectionView.isHidden == true else {
             self.thirdMenuCollectionView.isHidden = true
             self.secondMenuCollectionView.isHidden = false
@@ -363,8 +405,12 @@ extension GameMenuViewController
             selectCellSnapshot.center = CGPoint(x: 30 + selectCellSnapshot.width / 2, y: self.view.height - 25 - selectCellSnapshot.height / 2)
         }) { _ in
             self.loadSceneGroupList(with: menu)
-            self.secondMenuCollectionView.isHidden = false
-            self.secondMenuCollectionView.reloadData()
+            var nextCollectionView = self.secondMenuCollectionView!
+            if menu.menuID == 2 {
+                nextCollectionView = self.thirdMenuCollectionView!
+            }
+            nextCollectionView.isHidden = false
+            nextCollectionView.reloadData()
         }
     }
 }
@@ -414,6 +460,13 @@ extension GameMenuViewController
 extension GameMenuViewController
 {
     fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if let menu = self.selectedMenu {
+            if menu.menuID == 2 {
+                return self.customGameData.count
+            }
+        }
+        
         guard let group = self.selectedGroup else {
             return 0
         }
@@ -421,6 +474,14 @@ extension GameMenuViewController
     }
     
     fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let menu = self.selectedMenu, let cell: GameThirdMenuCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "thirdMenuCell", for: indexPath) as? GameThirdMenuCollectionViewCell{
+            if menu.menuID == 2 {
+                let gameData = self.customGameData[indexPath.row]
+                cell.sceneData = gameData
+                return cell
+            }
+        }
+        
         guard let group = self.selectedGroup, let cell: GameThirdMenuCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "thirdMenuCell", for: indexPath) as? GameThirdMenuCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -437,6 +498,16 @@ extension GameMenuViewController
     }
     
     fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let menu = self.selectedMenu, menu.menuID == 2,let gameView = self.gameView {
+            let sceneData = self.customGameData[indexPath.row]
+            let scene = MainGameScene(size: self.view.frame.size, data: sceneData)
+            scene.gameDelegate = self
+            self.view.bringSubview(toFront: gameView)
+            gameView.isHidden = false
+            gameView.presentScene(scene)
+            return
+        }
+        
         guard let group = self.selectedGroup, group.sceneDatas.count > indexPath.row,let gameView = self.gameView else {
             return
         }
