@@ -16,6 +16,7 @@ class GameMenuViewController: UIViewController {
     var secondMenuCollectionView: UICollectionView!
     var thirdMenuCollectionView: UICollectionView!
     var addSceneButton: UIButton!
+    var exportDataButton: UIButton!
     var titleLabel: UILabel!
     var menus: Array<GameMenu>!
     var selectedMenu: GameMenu?
@@ -39,6 +40,38 @@ class GameMenuViewController: UIViewController {
         self.view.backgroundColor = .white
         self.loadCustomData()
         self.createComponent()
+        self.createExportButton()
+    }
+    
+    func createExportButton() {
+        self.exportDataButton = UIButton(type: .custom)
+        self.exportDataButton.setTitle("导出自制关卡", for: .normal)
+        self.exportDataButton.setTitleColor(.black, for: .normal)
+        self.exportDataButton.sizeToFit()
+        self.view.addSubview(self.exportDataButton)
+        self.exportDataButton.addTarget(self, action: #selector(self.exportButtonClicked), for: .touchUpInside)
+        self.exportDataButton.center.x = self.view.width / 2
+        self.exportDataButton.top = 20
+    }
+    
+    @objc func exportButtonClicked() {
+//        let realm = try! Realm()
+//        if let filePath = realm.configuration.fileURL {
+//            let paste = UIPasteboard.general
+//
+//        }
+        var datas = [String]()
+        self.customGameData.forEach { data in
+            if let str = data.toJsonStr() {
+                datas.append(str)
+            }
+        }
+        let dataJson = ["data" : datas]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataJson, options: [])
+        let str = String(data: jsonData, encoding: .utf8)
+        let paste = UIPasteboard.general
+        paste.string = str
+        UIApplication.shared.open(URL(string: "weixin://")!, options: [:], completionHandler: nil)
     }
     
     func createComponent() {

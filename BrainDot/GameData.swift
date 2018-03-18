@@ -145,6 +145,16 @@ class GameSceneObject: Object {
     @objc dynamic var positionYOffset: CGFloat = 0.0
     @objc dynamic var colorHex = "000000"
     
+    func toJson() -> [String : Any] {
+        var Json = [String : Any]()
+        Json["sizeWidth"] = sizeWidth
+        Json["sizeHeight"] = sizeHeight
+        Json["positionXOffset"] = positionXOffset
+        Json["positionYOffset"] = positionYOffset
+        Json["colorHex"] = colorHex
+        return Json
+    }
+    
     override func copy() -> Any {
         let object = GameSceneObject()
         object.sizeWidth = self.sizeWidth
@@ -225,6 +235,12 @@ class BarrierObject: GameSceneObject {
         object.barrierType = self.barrierType
         return object
     }
+    
+    override func toJson() -> [String : Any] {
+        var json = super.toJson()
+        json["barrierType"] = barrierType
+        return json
+    }
 }
 
 class BallObject: GameSceneObject {
@@ -267,5 +283,36 @@ class GameData: Object {
     @objc dynamic var index = 0
     @objc dynamic var lock = true
     let parentGroup = LinkingObjects(fromType: SceneDataGroup.self, property: "sceneDatas")
+    
+    func toJson() -> [String : Any] {
+        var json = [String : Any]()
+        if balls.count > 0 {
+            var balls = [[String : Any]]()
+            self.balls.forEach { object in
+                balls.append(object.toJson())
+            }
+            json["balls"] = balls
+        }
+        if self.barriers.count > 0 {
+            var barriers = [[String : Any]]()
+            self.barriers.forEach { object in
+                barriers.append(object.toJson())
+            }
+            json["barriers"] = barriers
+        }
+        json["userCustom"] = self.userCustom
+        json["userFavorite"] = self.userFavorite
+        json["userConquer"] = self.userConquer
+        json["index"] = self.index
+        json["lock"] = self.lock
+        return json
+    }
+    
+    func toJsonStr() -> String? {
+        let json = self.toJson()
+        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
+        let str = String(data: jsonData, encoding: .utf8)
+        return str
+    }
 }
 
