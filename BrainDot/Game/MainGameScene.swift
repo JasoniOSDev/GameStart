@@ -205,6 +205,26 @@ extension MainGameScene {
                     tmpPath.addLine(to: CGPoint(x: x, y: y))
                     tmpPath.close()
                     path = tmpPath.cgPath
+                case BarrierType.circle.rawValue:
+                    nodeWidth = CGFloat.minimum(nodeWidth, nodeHeight)
+                    nodeHeight = nodeWidth
+                    positionX = centerX - nodeWidth / 2
+                    positionY = centerY - nodeHeight / 2
+                    path = UIBezierPath(roundedRect: CGRect(x: positionX, y: positionY, width: nodeWidth, height: nodeHeight), cornerRadius: nodeWidth / 2).cgPath
+                case BarrierType.trapezoid.rawValue:
+                    let topWidth = nodeWidth * CGFloat(barrier.topWidth)
+                    var point = CGPoint(x: positionX, y: positionY)
+                    let tmpPath = UIBezierPath()
+                    tmpPath.move(to: point)
+                    point.x += nodeWidth
+                    tmpPath.addLine(to: point)
+                    point.y += nodeHeight
+                    point.x -= (nodeWidth - topWidth) / 2
+                    tmpPath.addLine(to: point)
+                    point.x -= topWidth
+                    tmpPath.addLine(to: point)
+                    tmpPath.close()
+                    path = tmpPath.cgPath
                 default:
                     break
                 }

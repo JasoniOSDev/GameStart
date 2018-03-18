@@ -124,6 +124,8 @@ enum BarrierType: Int {
     case rectangle = 0
     case square = 1
     case triangle = 2
+    case circle
+    case trapezoid
 }
 
 enum SceneBorder: Int {
@@ -225,6 +227,7 @@ class GameSceneObject: Object {
 
 class BarrierObject: GameSceneObject {
     @objc dynamic var barrierType = 0
+    @objc dynamic var topWidth = 0.5 //顶部的宽度是整体宽度的百分比
     override func copy() -> Any {
         let object = BarrierObject()
         object.sizeWidth = self.sizeWidth
@@ -239,6 +242,7 @@ class BarrierObject: GameSceneObject {
     override func toJson() -> [String : Any] {
         var json = super.toJson()
         json["barrierType"] = barrierType
+        json["topWidth"] = topWidth
         return json
     }
 }

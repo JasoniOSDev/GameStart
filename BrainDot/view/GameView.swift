@@ -41,7 +41,7 @@ class GameView: SKView {
         back.addTarget(self, action: #selector(self.backButtonClicked), for: .touchUpInside)
         back.setImage(UIImage(named: "back"), for: .normal)
         self.addSubview(back)
-        back.sizeToFit()
+        back.frame.size = CGSize(width: 40, height: 40)
         self.backButton = back
         
         let retry = UIButton(type: .custom)

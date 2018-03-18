@@ -149,7 +149,15 @@ class CustomGameSceneViewController: UIViewController {
             triangle.barrierType = BarrierType.triangle.rawValue
             triangle.fullSize()
             triangle.colorHex = "ffffff"
-            let datas = [rectangle,square,triangle]
+            let circle = BarrierObject()
+            circle.colorHex = "ffffff"
+            circle.barrierType = BarrierType.circle.rawValue
+            circle.fullSize()
+            let trapezoid = BarrierObject()
+            trapezoid.colorHex = "ffffff"
+            trapezoid.barrierType = BarrierType.trapezoid.rawValue
+            trapezoid.fullSize()
+            let datas = [rectangle,square,triangle,circle,trapezoid]
             return datas
         }
         
