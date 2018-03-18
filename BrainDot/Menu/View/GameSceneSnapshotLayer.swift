@@ -126,7 +126,8 @@ class GameSceneBarrierShapeLayer: GameSceneLayer {
             let path = UIBezierPath(rect: self.bounds)
             self.path = path.cgPath
         case BarrierType.circle.rawValue:
-            let path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.bounds.width / 2)
+            let size = CGFloat.minimum(self.bounds.width, self.bounds.height)
+            let path = UIBezierPath(roundedRect: CGRect(x: (self.bounds.width - size) / 2, y: (self.bounds.height - size), width: size, height: size), cornerRadius: self.bounds.width / 2)
             self.path = path.cgPath
         case BarrierType.trapezoid.rawValue:
             let path = UIBezierPath()
