@@ -248,6 +248,7 @@ class CustomGameSceneViewController: UIViewController {
     
     func showGameScene(gameData: GameData) {
         let gameVC = MainGameViewController(gameData: gameData)
+        gameVC.previewMode = true
         self.present(gameVC, animated: true, completion: nil)
     }
 }

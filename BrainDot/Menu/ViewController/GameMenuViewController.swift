@@ -391,6 +391,7 @@ extension GameMenuViewController
             scene.gameDelegate = self
             self.view.bringSubview(toFront: gameView)
             gameView.isHidden = false
+            gameView.curGameData = sceneData
             gameView.presentScene(scene)
             return
         }
@@ -426,6 +427,7 @@ extension GameMenuViewController: MainGameSceneDelegate,GameViewDelegate {
             view.conquerContainerView?.removeFromSuperview()
             gameScene.updateComonent(with: nextData)
             gameScene.isPaused = false
+            view.curGameData = nextData
         }
     }
     

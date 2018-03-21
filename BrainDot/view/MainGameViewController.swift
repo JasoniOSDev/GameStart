@@ -10,9 +10,16 @@ import UIKit
 import SpriteKit
 class MainGameViewController: UIViewController {
 
-    var gameView: GameView!
+    var gameView: GameView?
     var gameScene: MainGameScene?
     var gameData: GameData!
+    var previewMode: Bool = false {
+        didSet {
+            if let gameView = self.gameView {
+                gameView.previewMode = self.previewMode
+            }
+        }
+    }
     init(gameData: GameData) {
         super.init(nibName: nil, bundle: nil)
         self.gameData = gameData
@@ -36,6 +43,7 @@ class MainGameViewController: UIViewController {
         view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         view.backgroundColor = .clear
         view.gameViewDelegate = self
+        view.previewMode = self.previewMode
         self.view.addSubview(view)
         self.gameView = view
         

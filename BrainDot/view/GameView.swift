@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import RealmSwift
 
 protocol GameViewDelegate: NSObjectProtocol {
     
@@ -23,7 +24,20 @@ class GameView: SKView {
     var backButton: UIButton!
     var retryButton: UIButton!
     var conquerContainerView: UIView?
+    var favoriteButton: UIButton!
     var conquerView: GameConquerView?
+    var curGameData: GameData? {
+        didSet{
+            if let data = self.curGameData {
+                self.favoriteButton.isSelected = data.userFavorite
+            }
+        }
+    }
+    var previewMode: Bool = false {
+        didSet{
+            self.favoriteButton.isHidden = self.previewMode
+        }
+    }
     weak var gameViewDelegate: GameViewDelegate?
 
     override init(frame: CGRect) {
@@ -50,6 +64,14 @@ class GameView: SKView {
         self.addSubview(retry)
         retry.sizeToFit()
         self.retryButton = retry
+        
+        let favorite = UIButton(type: .custom)
+        favorite.addTarget(self, action: #selector(self.favoriteButtonClicked), for: .touchUpInside)
+        favorite.setImage(UIImage(named: "favorite_icon"), for: .selected)
+        favorite.setImage(UIImage(named: "un_favlour"), for: .normal)
+        favorite.frame.size = CGSize(width: 40, height: 40)
+        self.addSubview(favorite)
+        self.favoriteButton = favorite
     }
     
     override func layoutSubviews() {
@@ -59,6 +81,9 @@ class GameView: SKView {
         
         self.retryButton.right = self.width - 20
         self.retryButton.top = 20
+
+        self.favoriteButton.center.x = self.width / 2
+        self.favoriteButton.top = 20
     }
     
     @objc func backButtonClicked() {
@@ -68,6 +93,26 @@ class GameView: SKView {
         }
         if let gameViewDelegate = self.gameViewDelegate {
             gameViewDelegate.gameViewBackButtonClicked(view: self)
+        }
+    }
+    
+    @objc func favoriteButtonClicked() {
+        if let data = self.curGameData {
+            let realm = try! Realm()
+            try! realm.write {
+                UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .calculationModeLinear, animations: {
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
+                        self.favoriteButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    })
+                    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                        self.favoriteButton.transform = CGAffineTransform.identity
+                    })
+                }, completion: {
+                    _ in
+                    self.favoriteButton.isSelected = !self.favoriteButton.isSelected
+                })
+                data.userFavorite = !data.userFavorite
+            }
         }
     }
     
@@ -102,5 +147,11 @@ class GameView: SKView {
         }
         self.conquerView = conquerView
         self.conquerContainerView = containerView
+    }
+    
+    func showGameScene(gameData: GameData) {
+        let scene = MainGameScene(size: self.frame.size, data: gameData)
+        self.curGameData = gameData
+        self.presentScene(scene)
     }
 }
