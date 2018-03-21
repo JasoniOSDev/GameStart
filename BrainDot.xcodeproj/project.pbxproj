@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9BF1078F632888F6332694DD /* Pods_BrainDot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2459015FF5B1A42C519F6ED3 /* Pods_BrainDot.framework */; };
+		D50149652062AC6500BB7C23 /* gameData.json in Resources */ = {isa = PBXBuildFile; fileRef = D50149642062AC6500BB7C23 /* gameData.json */; };
 		D5468148204143D7001B87D2 /* GameThirdMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5468147204143D7001B87D2 /* GameThirdMenuCollectionViewCell.swift */; };
 		D546814A20414962001B87D2 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D546814920414962001B87D2 /* AppIcon.xcassets */; };
 		D546814C20416606001B87D2 /* GameSceneSnapShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546814B20416606001B87D2 /* GameSceneSnapShotView.swift */; };
@@ -43,6 +44,7 @@
 		16C56FE971C222D39B93F8F0 /* Pods-BrainDot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrainDot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot.release.xcconfig"; sourceTree = "<group>"; };
 		2459015FF5B1A42C519F6ED3 /* Pods_BrainDot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BrainDot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8F8C968304CC598DCCBE8A /* Pods-BrainDot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrainDot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BrainDot/Pods-BrainDot.debug.xcconfig"; sourceTree = "<group>"; };
+		D50149642062AC6500BB7C23 /* gameData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gameData.json; sourceTree = SOURCE_ROOT; };
 		D5468147204143D7001B87D2 /* GameThirdMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameThirdMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		D546814920414962001B87D2 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		D546814B20416606001B87D2 /* GameSceneSnapShotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneSnapShotView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		D57DAA8E2011BBD60020D198 /* BrainDot */ = {
 			isa = PBXGroup;
 			children = (
+				D50149642062AC6500BB7C23 /* gameData.json */,
 				D5D91CC12053C52500233106 /* Custom */,
 				D57D61672045052900BB41E7 /* view */,
 				D50241592042EA00009BBD47 /* Game */,
@@ -285,6 +288,7 @@
 				D57DAA9B2011BBD60020D198 /* Main.storyboard in Resources */,
 				D546814A20414962001B87D2 /* AppIcon.xcassets in Resources */,
 				D57DAA9D2011BBD60020D198 /* Assets.xcassets in Resources */,
+				D50149652062AC6500BB7C23 /* gameData.json in Resources */,
 				D57DAAA02011BBD60020D198 /* LaunchScreen.storyboard in Resources */,
 				D57DAA942011BBD60020D198 /* Actions.sks in Resources */,
 			);
