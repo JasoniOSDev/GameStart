@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameThirdMenuCollectionViewCell: UICollectionViewCell {
+class SubMenuCollectionViewCell: UICollectionViewCell {
     
     var sceneView: GameMenuSceneView!
     var sceneData: GameData? {

@@ -112,12 +112,6 @@ class GameViewController: UIViewController {
             attachment.frequency = 0.3
             self.bubbleViewStopAttachments.append(attachment)
             let randomOffset = CGFloat(arc4random() % 30)
-//            if randomOffset < 15 {
-//                randomOffset = -CGFloat(arc4random() % 30)
-//                if (randomOffset > -10) {
-//                    randomOffset = -10
-//                }
-//            }
             view.center.y -= randomOffset
         }
     }

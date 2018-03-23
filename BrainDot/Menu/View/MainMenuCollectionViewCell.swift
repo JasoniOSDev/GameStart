@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameFirstMenuCollectionViewCell: UICollectionViewCell {
+class MainMenuCollectionViewCell: UICollectionViewCell {
     var imageView: UIImageView!
     var titleLabel: UILabel!
     

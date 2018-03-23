@@ -12,8 +12,8 @@ import RealmSwift
 
 class GameMenuViewController: UIViewController {
 
-    var firstMenuCollectionView: UICollectionView!
-    var thirdMenuCollectionView: UICollectionView!
+    var mainMenuCollectionView: UICollectionView!
+    var subMenuCollectionView: UICollectionView!
     var addSceneButton: UIButton!
     var exportDataButton: UIButton!
     var titleLabel: UILabel!
@@ -92,7 +92,7 @@ class GameMenuViewController: UIViewController {
                 }
                 switch change {
                 case .update(_, deletions: _, insertions: _, modifications: _):
-                    strongSelf.thirdMenuCollectionView.reloadData()
+                    strongSelf.subMenuCollectionView.reloadData()
                 default:
                     break
                 }
@@ -102,8 +102,8 @@ class GameMenuViewController: UIViewController {
     
     func createComponent() {
         self.createMenuData()
-        self.createFirstMenuCollectionView()
-        self.createThirdMenuCollectionView()
+        self.createMainMenuCollectionView()
+        self.createsubMenuCollectionView()
         self.createTitleLabel()
         self.createGameView()
         self.createAddSceneButton()
@@ -164,31 +164,31 @@ class GameMenuViewController: UIViewController {
         self.titleLabel.frame.origin = CGPoint(x: 30, y: 20)
     }
     
-    func createFirstMenuCollectionView() {
+    func createMainMenuCollectionView() {
         let layout = UICollectionViewFlowLayout()
         let space: CGFloat = 80
         layout.itemSize = CGSize(width: 140, height: 165)
         layout.minimumInteritemSpacing = space
         layout.minimumLineSpacing = space
         layout.scrollDirection = .horizontal
-        self.firstMenuCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        self.firstMenuCollectionView.showsVerticalScrollIndicator = false
-        self.firstMenuCollectionView.showsHorizontalScrollIndicator = false
-        self.firstMenuCollectionView.delegate = self
-        self.firstMenuCollectionView.dataSource = self
-        self.firstMenuCollectionView.register(GameFirstMenuCollectionViewCell.self, forCellWithReuseIdentifier: "firstMenuCell")
-        self.firstMenuCollectionView.backgroundColor = .white
-        self.view.addSubview(self.firstMenuCollectionView)
-        self.firstMenuCollectionView.frame.size = CGSize(width: self.view.frame.width, height: 165)
-        self.firstMenuCollectionView.center = self.view.center
+        self.mainMenuCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        self.mainMenuCollectionView.showsVerticalScrollIndicator = false
+        self.mainMenuCollectionView.showsHorizontalScrollIndicator = false
+        self.mainMenuCollectionView.delegate = self
+        self.mainMenuCollectionView.dataSource = self
+        self.mainMenuCollectionView.register(MainMenuCollectionViewCell.self, forCellWithReuseIdentifier: "mainMenuCell")
+        self.mainMenuCollectionView.backgroundColor = .white
+        self.view.addSubview(self.mainMenuCollectionView)
+        self.mainMenuCollectionView.frame.size = CGSize(width: self.view.frame.width, height: 165)
+        self.mainMenuCollectionView.center = self.view.center
         var leftInset = (self.view.frame.width - (layout.itemSize.width + space) * CGFloat(self.menus.count) + space) / 2
         if leftInset < 40 {
             leftInset = 40
         }
-        self.firstMenuCollectionView.contentInset = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: 0)
+        self.mainMenuCollectionView.contentInset = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: 0)
     }
     
-    private func createThirdMenuCollectionView() {
+    private func createsubMenuCollectionView() {
         let layout = UICollectionViewFlowLayout()
         let lineSpace: CGFloat = 30
         let itemSpace: CGFloat = 20
@@ -201,59 +201,59 @@ class GameMenuViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(GameThirdMenuCollectionViewCell.self, forCellWithReuseIdentifier: "thirdMenuCell")
+        collectionView.register(SubMenuCollectionViewCell.self, forCellWithReuseIdentifier: "subMenuCell")
         collectionView.backgroundColor = .white
         collectionView.top = 80
         collectionView.contentInset = UIEdgeInsetsMake(0, 50, 0, 50)
         collectionView.clipsToBounds = false
         self.view.addSubview(collectionView)
         collectionView.isHidden = true
-        self.thirdMenuCollectionView = collectionView
+        self.subMenuCollectionView = collectionView
     }
 }
 
 extension GameMenuViewController: UICollectionViewDelegate,UICollectionViewDataSource {
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.firstMenuCollectionView {
-            return firstMenuCollectionView(collectionView: collectionView, numberOfItemsInSection: section)
+        if collectionView == self.mainMenuCollectionView {
+            return mainMenuCollectionView(collectionView: collectionView, numberOfItemsInSection: section)
         }
-        if collectionView == self.thirdMenuCollectionView {
-            return thirdMenuCollectionView(collectionView: collectionView, numberOfItemsInSection: section)
+        if collectionView == self.subMenuCollectionView {
+            return subMenuCollectionView(collectionView: collectionView, numberOfItemsInSection: section)
         }
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.firstMenuCollectionView
+        if collectionView == self.mainMenuCollectionView
         {
-            return firstMenuCollectionView(collectionView: collectionView, cellForItemAt: indexPath)
+            return mainMenuCollectionView(collectionView: collectionView, cellForItemAt: indexPath)
         }
-        if collectionView == self.thirdMenuCollectionView {
-            return thirdMenuCollectionView(collectionView: collectionView, cellForItemAt: indexPath)
+        if collectionView == self.subMenuCollectionView {
+            return subMenuCollectionView(collectionView: collectionView, cellForItemAt: indexPath)
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView == self.firstMenuCollectionView {
-            firstMenuCollectionView(collectionView: collectionView,willDisplay: cell,forItemAt: indexPath)
+        if collectionView == self.mainMenuCollectionView {
+            mainMenuCollectionView(collectionView: collectionView,willDisplay: cell,forItemAt: indexPath)
         }
-        if collectionView == self.thirdMenuCollectionView {
-            thirdMenuCollectionView(collectionView: collectionView,willDisplay: cell,forItemAt: indexPath)
+        if collectionView == self.subMenuCollectionView {
+            subMenuCollectionView(collectionView: collectionView,willDisplay: cell,forItemAt: indexPath)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.firstMenuCollectionView {
-            firstMenuCollectionView(collectionView: collectionView, didSelectItemAt: indexPath)
+        if collectionView == self.mainMenuCollectionView {
+            mainMenuCollectionView(collectionView: collectionView, didSelectItemAt: indexPath)
         }
-        if collectionView == self.thirdMenuCollectionView {
-            thirdMenuCollectionView(collectionView: collectionView, didSelectItemAt: indexPath)
+        if collectionView == self.subMenuCollectionView {
+            subMenuCollectionView(collectionView: collectionView, didSelectItemAt: indexPath)
         }
     }
 }
@@ -290,12 +290,12 @@ extension GameMenuViewController
         }
         
         selectedCell.isUserInteractionEnabled = false
-        self.thirdMenuCollectionView.isHidden = true
+        self.subMenuCollectionView.isHidden = true
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
             selectedCell.transform = CGAffineTransform.identity
             selectedCell.center = self.selectedOriginPosition
         }) { _ in
-            self.firstMenuCollectionView.isHidden = false
+            self.mainMenuCollectionView.isHidden = false
             selectedCell.removeFromSuperview()
             self.selectedMenuCell = nil
         }
@@ -305,12 +305,12 @@ extension GameMenuViewController
 //firstMenu extension
 extension GameMenuViewController
 {
-    fileprivate func firstMenuCollectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    fileprivate func mainMenuCollectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.menus.count
     }
     
-    fileprivate func firstMenuCollectionView(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let collectionViewCell: GameFirstMenuCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstMenuCell", for: indexPath) as? GameFirstMenuCollectionViewCell else {
+    fileprivate func mainMenuCollectionView(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let collectionViewCell: MainMenuCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mainMenuCell", for: indexPath) as? MainMenuCollectionViewCell else {
             return UICollectionViewCell()
         }
         let menu = self.menus[indexPath.row]
@@ -318,8 +318,8 @@ extension GameMenuViewController
         return collectionViewCell
     }
     
-    fileprivate func firstMenuCollectionView(collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let validCell: GameFirstMenuCollectionViewCell = cell as? GameFirstMenuCollectionViewCell else {
+    fileprivate func mainMenuCollectionView(collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let validCell: MainMenuCollectionViewCell = cell as? MainMenuCollectionViewCell else {
             return
         }
         validCell.titleLabel.alpha = 0
@@ -333,8 +333,8 @@ extension GameMenuViewController
         }, completion: nil)
     }
     
-    fileprivate func firstMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? GameFirstMenuCollectionViewCell,self.menus.count > indexPath.row else {
+    fileprivate func mainMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MainMenuCollectionViewCell,self.menus.count > indexPath.row else {
             return
         }
         guard let selectCellSnapshot = cell.imageView.snapshotView(afterScreenUpdates: false) else {
@@ -353,7 +353,7 @@ extension GameMenuViewController
             selectCellSnapshot.center = CGPoint(x: 30 + selectCellSnapshot.width / 2, y: self.view.height - 25 - selectCellSnapshot.height / 2)
         }) { _ in
             self.refreshSelectedDatas(selectedMenuID: menu.menuID)
-            let nextCollectionView = self.thirdMenuCollectionView!
+            let nextCollectionView = self.subMenuCollectionView!
             nextCollectionView.isHidden = false
             nextCollectionView.reloadData()
         }
@@ -363,13 +363,13 @@ extension GameMenuViewController
 //thirdMenu extension
 extension GameMenuViewController
 {
-    fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    fileprivate func subMenuCollectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.gameDatas?.count ?? 0
     }
     
-    fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let _ = self.selectedMenu, let cell: GameThirdMenuCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "thirdMenuCell", for: indexPath) as? GameThirdMenuCollectionViewCell,let gameDatas = self.gameDatas{
+    fileprivate func subMenuCollectionView(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let _ = self.selectedMenu, let cell: SubMenuCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "subMenuCell", for: indexPath) as? SubMenuCollectionViewCell,let gameDatas = self.gameDatas{
             let gameData = gameDatas[indexPath.row]
             cell.sceneData = gameData
             return cell
@@ -377,14 +377,14 @@ extension GameMenuViewController
         return UICollectionViewCell()
     }
     
-    fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    fileprivate func subMenuCollectionView(collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.alpha = 0
         UIView.animate(withDuration: 0.25) {
             cell.alpha = 1
         }
     }
     
-    fileprivate func thirdMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    fileprivate func subMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let _ = self.selectedMenu,let gameView = self.gameView,let gameDatas = self.gameDatas {
             let sceneData = gameDatas[indexPath.row]
             let scene = MainGameScene(size: self.view.frame.size, data: sceneData)

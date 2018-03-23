@@ -282,11 +282,8 @@ class GameData: Object {
     @objc dynamic var userCustom = false //是否是用户自定义
     @objc dynamic var userFavorite = false //用户是否收藏
     @objc dynamic var userConquer = false //是否已经通过
-    @objc dynamic var border = SceneBorder.bottom.rawValue
-    @objc dynamic var sceneID = ""
     @objc dynamic var index = 0
     @objc dynamic var lock = true
-    let parentGroup = LinkingObjects(fromType: SceneDataGroup.self, property: "sceneDatas")
     
     func toJson() -> [String : Any] {
         var json = [String : Any]()
