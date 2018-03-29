@@ -271,22 +271,33 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
     }
     
     @objc func panGestureAction(gesture: UIPanGestureRecognizer) {
-        if let layer = self.selectedLayer {
-            switch gesture.state{
-                case .began:
+        switch gesture.state{
+            case .began:
+                let location = gesture.location(in: self.view)
+                for layer in self.gameSceneLayers {
+                    if layer.frame.contains(location) {
+                        self.selectedLayer?.selected = false
+                        layer.selected = true
+                        self.selectedLayer = layer
+                    }
+                }
+                if let layer = self.selectedLayer {
                     layer.move = true
-                    let location = gesture.location(in: self.view)
                     self.touchOriginPoint = location
                     self.selectedLayerPosition = layer.position
                     self.hiddenButtons()
-                case .changed:
+            }
+            case .changed:
+                if let layer = self.selectedLayer {
                     let location = gesture.location(in: self.view)
                     let preLocation = self.touchOriginPoint
                     let diff = CGPoint(x: location.x - preLocation.x, y: location.y - preLocation.y)
                     let newPoint = CGPoint(x: diff.x + self.selectedLayerPosition.x, y: diff.y + self.selectedLayerPosition.y)
                     layer.sceneObject.updatePosition(newPoint: newPoint)
                     self.refreshFrame(with: layer, data: layer.sceneObject)
-                case .cancelled,.ended:
+            }
+            case .cancelled,.ended:
+                if let layer = self.selectedLayer {
                     layer.move = false
                     self.perform(#selector(self.showButtons), with: nil, afterDelay: 1)
                     if !self.view.bounds.intersects(layer.frame) {
@@ -295,13 +306,10 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
                         let generator = UIImpactFeedbackGenerator(style: .light)
                         generator.prepare()
                         generator.impactOccurred()
-                        
                 }
-                default:
-                    break
             }
-           
-            
+            default:
+                break
         }
     }
     
@@ -320,10 +328,6 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
         }
         let diff: CGFloat = (gesture.scale - 1) * 0.8
         let scale: CGFloat = diff + 1
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        layer.transform = CATransform3DMakeScale(scale, scale, 1)
-        CATransaction.commit()
         switch gesture.state {
         case .began:
             CATransaction.begin()
@@ -332,6 +336,11 @@ extension CustomGameSceneViewController: BackupComponentContainerViewDelegate{
             CATransaction.commit()
             self.userIsTouch = true
             self.hiddenButtons()
+        case .changed:
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            layer.transform = CATransform3DMakeScale(scale, scale, 1)
+            CATransaction.commit()
         case .cancelled,
              .ended:
             self.userIsTouch = false

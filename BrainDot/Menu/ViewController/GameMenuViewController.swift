@@ -155,7 +155,7 @@ class GameMenuViewController: UIViewController {
  
     func createTitleLabel() {
         self.titleLabel = UILabel()
-        self.titleLabel.text = "脑点子"
+        self.titleLabel.text = "球球世界"
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 64)
         self.titleLabel.textColor = UIColor(colorHex: "1B91DC")
         self.titleLabel.sizeToFit()

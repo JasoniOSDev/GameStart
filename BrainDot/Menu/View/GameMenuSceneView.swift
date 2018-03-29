@@ -16,6 +16,9 @@ class GameMenuSceneView: UIView {
         }
     }
     
+    var favoriteIconImageView: UIImageView!
+    var conquerImageView: UIImageView!
+    var sceneSnapshotView: GameSceneSnapShotView!
     var lockContainerView: UIView!
     var lockIconImageView: UIImageView!
     var indexLabel: UILabel!
@@ -29,10 +32,6 @@ class GameMenuSceneView: UIView {
             self.setNeedsLayout()
         }
     }
-    
-    var favoriteIconImageView: UIImageView!
-    var conquerImageView: UIImageView!
-    var sceneSnapshotView: GameSceneSnapShotView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

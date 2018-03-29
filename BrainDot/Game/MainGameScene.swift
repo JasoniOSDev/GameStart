@@ -281,6 +281,22 @@ extension MainGameScene {
         }
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        if let touch = touches.first,var _ = self.curDrawBarrierData, touches.count == 1{
+            let location = touch.location(in: self)
+            if self.checkValidLocation(location: location) {
+                self.curDrawBarrierData!.addNewDrawPoint(newLocation: location)
+                self.needUpdateCurDrawBarrierNode = true
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        self.releaseForce()
+    }
+    
     func checkValidLocation(location: CGPoint) -> Bool {
         
         return true
@@ -359,23 +375,6 @@ extension MainGameScene {
         }
     }
     
-    
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        if let touch = touches.first,var _ = self.curDrawBarrierData, touches.count == 1{
-            let location = touch.location(in: self)
-            if self.checkValidLocation(location: location) {
-                self.curDrawBarrierData!.addNewDrawPoint(newLocation: location)
-                self.needUpdateCurDrawBarrierNode = true
-            }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        self.releaseForce()
-    }
 }
 
 extension MainGameScene: SKPhysicsContactDelegate {
