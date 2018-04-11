@@ -51,6 +51,7 @@ class MainGameScene: SKScene {
     }
     
     func updateComonent(with data: GameData) {
+        self.data = data
         self.staticBarriers.forEach { node in
             node.removeFromParent()
         }
