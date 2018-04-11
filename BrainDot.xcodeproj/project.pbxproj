@@ -516,11 +516,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6QU98983F9;
+				DEVELOPMENT_TEAM = XY62SV3XGC;
 				INFOPLIST_FILE = BrainDot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.sr.project.BrainDot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BrainDot/BrainDot-Bridging-Header.h";
@@ -538,11 +538,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6QU98983F9;
+				DEVELOPMENT_TEAM = XY62SV3XGC;
 				INFOPLIST_FILE = BrainDot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.sr.project.BrainDot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasooon.project.BrainDot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BrainDot/BrainDot-Bridging-Header.h";
