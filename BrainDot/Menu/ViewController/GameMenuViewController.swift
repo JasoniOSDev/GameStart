@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 import RealmSwift
 
+//菜单页面，也是几乎主操作页面
 class GameMenuViewController: UIViewController {
 
     var mainMenuCollectionView: UICollectionView!
@@ -72,7 +73,7 @@ class GameMenuViewController: UIViewController {
     
     func refreshSelectedDatas(selectedMenuID: Int) {
         GameDataManager.createSceneGroupIfNeed()
-        let realm = try! Realm()
+        let realm = try! Realm()//这里会抛出异常，所以使用try
         
         switch selectedMenuID {
         case 0:
@@ -387,6 +388,12 @@ extension GameMenuViewController
     fileprivate func subMenuCollectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let _ = self.selectedMenu,let gameView = self.gameView,let gameDatas = self.gameDatas {
             let sceneData = gameDatas[indexPath.row]
+            //判断是否没有解锁
+            if sceneData.lock {
+                return;
+            }
+            //如果已经解锁
+            //创建游戏
             let scene = MainGameScene(size: self.view.frame.size, data: sceneData)
             scene.gameDelegate = self
             self.view.bringSubview(toFront: gameView)

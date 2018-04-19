@@ -131,7 +131,7 @@ class GameViewController: UIViewController {
                 behavior.anchorPoint.x += CGFloat(arc4random() % 200)
             }
         }
-        UIView.animateKeyframes(withDuration: 2, delay: 0, options: [.calculationModeLinear,.beginFromCurrentState], animations: {
+        UIView.animateKeyframes(withDuration: 1.6, delay: 0, options: [.calculationModeLinear,.beginFromCurrentState], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0 / 3.0, animations: {
                 self.titleLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 self.tipLabel.alpha = 0

@@ -17,9 +17,9 @@ let drawBarrierCategory: UInt32 = 0x1 << 3; // 00000000000000000000000000001000
 class MainGameScene: SKScene {
 
     var data: GameData!
-    var balls: Array<SKShapeNode> = Array<SKShapeNode>()
-    var drawBarriers: Array<SKSpriteNode> = Array<SKSpriteNode>()
-    var staticBarriers: Array<SKShapeNode> = Array<SKShapeNode>()
+    var balls: Array<SKShapeNode> = Array<SKShapeNode>()//球
+    var drawBarriers: Array<SKSpriteNode> = Array<SKSpriteNode>()//用户在游戏过程中绘制的线条（障碍物）
+    var staticBarriers: Array<SKShapeNode> = Array<SKShapeNode>()//每个关卡的障碍物
     var drawDatas: Array<DrawBarrier> = Array<DrawBarrier>()
     
     var curDrawBarrierData: DrawBarrier?
@@ -146,8 +146,9 @@ class MainGameScene: SKScene {
     func createDrawBarrierWith(drawBarrier: DrawBarrier!) -> SKShapeNode {
         let shapeNode = SKShapeNode()
         shapeNode.fillColor = .clear
-        shapeNode.lineWidth = 20
-        shapeNode.strokeTexture = SKTexture(imageNamed: "strokeTexture")
+        shapeNode.lineWidth = 10
+//        shapeNode.strokeTexture = SKTexture(imageNamed: "strokeTexture")
+        shapeNode.strokeColor = UIColor.gray
         shapeNode.lineCap = .round
         return shapeNode
     }
@@ -155,8 +156,8 @@ class MainGameScene: SKScene {
     func createInvalidDrawNode() -> SKShapeNode {
         let shapeNode = SKShapeNode()
         shapeNode.fillColor = .clear
-        shapeNode.lineWidth = 20
-        shapeNode.strokeTexture = SKTexture(imageNamed: "strokeTexture")
+        shapeNode.lineWidth = 10
+        shapeNode.strokeColor = UIColor.gray
         shapeNode.lineCap = .round
         shapeNode.alpha = 0.5
         return shapeNode
@@ -265,6 +266,7 @@ extension MainGameScene {
 
 extension MainGameScene {
     
+    //用户手指按下屏幕的时候调用的方法
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
@@ -276,19 +278,20 @@ extension MainGameScene {
                 var drawData = DrawBarrier()
                 self.curDrawBarrierNode = self.createDrawBarrierWith(drawBarrier: curDrawBarrierData)
                 self.addChild(self.curDrawBarrierNode)
-                drawData.points.append(location)
+                drawData.points.append(location)//将第一个按下的点添加到数据结构当中
                 self.curDrawBarrierData = drawData
             }
         }
     }
     
+    //手指在屏幕移动的时候就会调用这个方法
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         if let touch = touches.first,var _ = self.curDrawBarrierData, touches.count == 1{
-            let location = touch.location(in: self)
+            let location = touch.location(in: self)//当前手指的位置
             if self.checkValidLocation(location: location) {
                 self.curDrawBarrierData!.addNewDrawPoint(newLocation: location)
-                self.needUpdateCurDrawBarrierNode = true
+                self.needUpdateCurDrawBarrierNode = true//需要刷新Node
             }
         }
     }

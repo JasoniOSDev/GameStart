@@ -47,6 +47,7 @@ struct DrawPan {
 }
 
 struct DrawBarrier {
+    //用户绘制的图形主要是路径
     var path: CGPath? {
         get {
             if self.points.count > 1 {
@@ -64,6 +65,7 @@ struct DrawBarrier {
             return nil
         }
     }
+    //每个路径由多个点组成的
     var points: Array<CGPoint> = Array<CGPoint>()
     var solidPointListOne: Array<CGPoint> = Array<CGPoint>()
     var solidPointListTwo: Array<CGPoint> = Array<CGPoint>()
