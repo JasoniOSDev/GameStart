@@ -13,7 +13,13 @@ class GameConquerView: UIView {
     var iconImageView: UIImageView!
     var tipLabel: UILabel!
     var nextButton: UIButton!
-    var nextGameData: GameData?
+    var nextGameData: GameData?{
+        didSet{
+            if let _ = self.nextGameData {
+                self.nextButton.isHidden = false
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,6 +78,7 @@ class GameConquerView: UIView {
         button.layer.cornerRadius = 15
         button.layer.borderColor = UIColor(colorHex: "9B9B9B").cgColor
         button.layer.borderWidth = 1
+        button.isHidden = true
         self.addSubview(button)
         self.nextButton = button
     }
