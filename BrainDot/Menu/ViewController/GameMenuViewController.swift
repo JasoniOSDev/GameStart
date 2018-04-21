@@ -85,18 +85,20 @@ class GameMenuViewController: UIViewController {
         default:
             break;
         }
-        if self.dataNotificationToken == nil {
-            self.dataNotificationToken = self.gameDatas!.observe { [weak self]
-                change in
-                guard let strongSelf = self else {
-                    return
-                }
-                switch change {
-                case .update(_, deletions: _, insertions: _, modifications: _):
-                    strongSelf.subMenuCollectionView.reloadData()
-                default:
-                    break
-                }
+        if let _ = self.dataNotificationToken {
+            self.dataNotificationToken?.invalidate()
+        }
+        
+        self.dataNotificationToken = self.gameDatas!.observe { [weak self]
+            change in
+            guard let strongSelf = self else {
+                return
+            }
+            switch change {
+            case .update(_, deletions: _, insertions: _, modifications: _):
+                strongSelf.subMenuCollectionView.reloadData()
+            default:
+                break
             }
         }
     }
